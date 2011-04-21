@@ -23,11 +23,16 @@ div.entry
 <h1>Introduction to blogs.perl.org + Text::Table</h1>
 
 <p>
-Hello, all. I decided to start blogging about Perl-related stuff here on
-blogs.perl.org, in hope of getting more comments from active Perlers. (Until
-now, I've blogged about it <a href="http://shlomif-tech.livejournal.com/">on
+Hello, Perl bloggers! Allow me to introduce myself. I decided to start 
+blogging about a lot of 
+my Perl-related stuff here on blogs.perl.org, in hope of getting more comments 
+from active Perlers. (Until now, I've blogged about it 
+<a href="http://shlomif-tech.livejournal.com/">on
 my technical LiveJournal blog</a> and previously on 
 <a href="http://use.perl.org/~Shlomi+Fish/journal/">use.perl.org Journal</a>).
+</p>
+
+<p>
 My name is Shlomi Fish and you can learn more about me from the various
 pages of my <a href="http://www.shlomifish.org/">home site - 
 www.shlomifish.org</a> and
@@ -36,7 +41,7 @@ Perl in 1996, in order to start working for the now mostly defunct Cortext Web
 Design, and then used it to write CGI scripts, and for 
 shell-scripts-written-in-Perl, after using DOS and some early versions of
 Windows and learning a little GW-BASIC, QBasic, C, what was then C/C++ and 
-some Visual Basic for Applications. I fell in love with both Perl 5 and
+some <a href="http://en.wikipedia.org/wiki/Visual_Basic_for_Applications">Visual Basic for Applications</a>. I fell in love with both Perl 5 and
 UNIX-like operating systems, and been using them ever since.
 </p>
 
@@ -54,8 +59,8 @@ scheme of <a href="http://fc-solve.berlios.de/">Freecell Solver</a>. Now,
 I noticed that one thing I tried to do with it, in order to present nicely
 formatted borders, using the 
 <a href="http://en.wikipedia.org/wiki/Box-drawing_characters">Unicode 
-box-drawing characters</a>, there was something there I was unable to do.
-As a result, I've written 
+box-drawing characters</a> (which some people would recall from DOS), there 
+was something there I was unable to do. As a result, I've written 
 <a href="https://rt.cpan.org/Public/Bug/Display.html?id=61610">a patch</a>,
 which was written using <a href="http://github.com/shlomif/Text-Table">a git 
 repository on github</a>.
@@ -71,6 +76,10 @@ released under a separate namespace - <tt>Text::Table2</tt> or so.
 </p>
 
 <p>
+Many thanks go to ANNO for agreeing for me to further develop Text::Table.
+</p>
+
+<p>
 Using my git repository, I did many cleanups, like add 
 pod.t and pod-coverage.t, tweak the author information, add more strict and
 warnings to the file, etc. ANNO 's original licence is 
@@ -79,11 +88,11 @@ terms as Perl"</a>, but since it is an iffy licensing, I decided that all
 further changes will be under the terms of the Public-Domain/X11L/etc.. People
 who send me pull requests on github may wish to add their names to the credits
 (in the changes or even in the core module) but must not claim copyrights to
-the module.
+their changes.
 </p>
 
 <p>
-OK, now for some output of the Unicodey table:
+OK, now for some output of the Unicode table:
 </p>
 
 <pre>
@@ -117,12 +126,13 @@ Go over the code and clean it up
 </li>
 
 <li>
-Add CPAN keywords to the META.yml. (Perhaps this will require defining a
-Module-Build-based Build.PL file).
+Add CPAN keywords to the <tt>META.yml</tt>. (Perhaps this will require
+defining a Module-Build-based Build.PL file).
 </li>
 
 <li>
-Add URLs (ditto) - to the module's homepage, to the github repository, etc..
+Add URLs to the <tt>META.ym</tt>l - to the module's homepage, to the github repository, 
+etc..
 </li>
 
 <li>
