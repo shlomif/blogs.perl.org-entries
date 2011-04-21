@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim: set indentexpr=:   -->
+<!DOCTYPE
+    html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+<head>
+<title>blogs.perl.org Blog</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+div.entry
+{
+    border: darkgreen solid medium;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+</style>
+</head>
+<body>
+
+<div class="entry">
+
+<h1>Introduction to blogs.perl.org + Text::Table</h1>
+
+<p>
+Hello, all. I decided to start blogging about Perl-related stuff here on
+blogs.perl.org, in hope of getting more comments from active Perlers. (Until
+now, I've blogged about it <a href="http://shlomif-tech.livejournal.com/">on
+my technical LiveJournal blog</a> and previously on 
+<a href="http://use.perl.org/~Shlomi+Fish/journal/">use.perl.org Journal</a>).
+My name is Shlomi Fish and you can learn more about me from the various
+pages of my <a href="http://www.shlomifish.org/">home site - 
+www.shlomifish.org</a> and
+from <a href="http://search.cpan.org/~shlomif/">my CPAN page</a>. I've learnt
+Perl in 1996, in order to start working for the now mostly defunct Cortext Web
+Design, and then used it to write CGI scripts, and for 
+shell-scripts-written-in-Perl, after using DOS and some early versions of
+Windows and learning a little GW-BASIC, QBasic, C, what was then C/C++ and 
+some Visual Basic for Applications. I fell in love with both Perl 5 and
+UNIX-like operating systems, and been using them ever since.
+</p>
+
+<p>
+OK, having put that aside - let's move on to the main topic of this post.
+</p>
+
+<hr />
+
+<p>
+Many months ago I wanted to use the
+<a href="http://search.cpan.org/dist/Text-Table/">Text::Table CPAN module</a>
+to present a table related to the meta-scan heuristics construction 
+scheme of <a href="http://fc-solve.berlios.de/">Freecell Solver</a>. Now,
+I noticed that one thing I tried to do with it, in order to present nicely
+formatted borders, using the 
+<a href="http://en.wikipedia.org/wiki/Box-drawing_characters">Unicode 
+box-drawing characters</a>, there was something there I was unable to do.
+As a result, I've written 
+<a href="https://rt.cpan.org/Public/Bug/Display.html?id=61610">a patch</a>,
+which was written using <a href="http://github.com/shlomif/Text-Table">a git 
+repository on github</a>.
+</p>
+
+<p>
+Now, the author of Text-Table (ANNO) told me he was working on a new version
+of Text-Table, which will contain many improvements. However, I was still
+interested in the patch, and after talking on 
+<a href="irc://irc.freenode.net/#perl">#perl</a>, he said I could have co-maint
+on Text-Table-1.x and continue to improve it. The new Text-Table will be 
+released under a separate namespace - <tt>Text::Table2</tt> or so.
+</p>
+
+<p>
+Using my git repository, I did many cleanups, like add 
+pod.t and pod-coverage.t, tweak the author information, add more strict and
+warnings to the file, etc. ANNO 's original licence is 
+<a href="http://perlbuzz.com/2009/07/help-end-licensing-under-same-terms-as-perl-itself.html">"Same 
+terms as Perl"</a>, but since it is an iffy licensing, I decided that all
+further changes will be under the terms of the Public-Domain/X11L/etc.. People
+who send me pull requests on github may wish to add their names to the credits
+(in the changes or even in the core module) but must not claim copyrights to
+the module.
+</p>
+
+<p>
+OK, now for some output of the Unicodey table:
+</p>
+
+<pre>
+┌───────╥─────┬──────┬─────┬────┬──────┐
+│ Place ║ 1   │ 2    │ 3   │ 4  │ 5    │
+├───────╫─────┼──────┼─────┼────┼──────┤
+│ 1     ║ 68  │ 317  │ 15  │ 3  │ 381  │
+├───────╫─────┼──────┼─────┼────┼──────┤
+│ 2     ║ 171 │ 482  │ 31  │ 14 │ 594  │
+├───────╫─────┼──────┼─────┼────┼──────┤
+│ 3     ║ 275 │ 867  │ 42  │ 22 │ 1007 │
+├───────╫─────┼──────┼─────┼────┼──────┤
+│ 4     ║ 458 │ 1442 │ 125 │ 30 │ 1630 │
+├───────╫─────┼──────┼─────┼────┼──────┤
+│ 5     ║ 640 │ 1715 │ 137 │ 47 │ 1730 │
+└───────╨─────┴──────┴─────┴────┴──────┘
+</pre>
+
+<p>
+Future plans are:
+</p>
+
+<ol>
+
+<li>
+Convert the remaining test scripts to Test::More.
+</li>
+
+<li>
+Go over the code and clean it up
+</li>
+
+<li>
+Add CPAN keywords to the META.yml. (Perhaps this will require defining a
+Module-Build-based Build.PL file).
+</li>
+
+<li>
+Add URLs (ditto) - to the module's homepage, to the github repository, etc..
+</li>
+
+<li>
+Possibly implement some future features.
+</li>
+
+<li>
+Add some more tests.
+</li>
+
+</ol>
+
+</div>
+</body>
+</html>
