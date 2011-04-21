@@ -49,27 +49,29 @@ Many months ago I wanted to use the
 <a href="http://search.cpan.org/dist/Text-Table/">Text::Table CPAN module</a>
 to present a table related to the meta-scan heuristics construction 
 scheme of <a href="http://fc-solve.berlios.de/">Freecell Solver</a>. Now,
-I noticed that one thing I tried to do with it, in order to present nicely
-formatted borders, using the 
+I wanted to present nicely formatted borders, using the 
 <a href="http://en.wikipedia.org/wiki/Box-drawing_characters">Unicode 
-box-drawing characters</a> (which some people would recall from DOS), there 
-was something there I was unable to do. As a result, I've written 
+box-drawing characters</a> (which some people would recall from DOS).
+However, I found it difficult to specify the separators in the
+rulers properly based on their indices - they were assumed to be the
+same globally. As a result, I've written 
 <a href="https://rt.cpan.org/Public/Bug/Display.html?id=61610">a patch</a>,
-which was written using <a href="http://github.com/shlomif/Text-Table">a git 
-repository on github</a>.
+and placed the modifications in 
+<a href="http://github.com/shlomif/Text-Table">a github repository</a>.
 </p>
 
 <p>
-Now, the author of Text-Table (ANNO) told me he was working on a new version
+The author of Text-Table (ANNO) told me he was working on a new version
 of Text-Table, which will contain many improvements. However, I was still
-interested in the patch, and after talking on 
-<a href="irc://irc.freenode.net/#perl">#perl</a>, he said I could have co-maint
+interested in an enhanced version of the old Text-Table codebase with my 
+patch, and after talking on <a href="irc://irc.freenode.net/#perl">#perl</a>, 
+ANNO said I could have co-maint
 on Text-Table-1.x and continue to improve it. The new Text-Table will be 
 released under a separate namespace - <tt>Text::Table2</tt> or so.
 </p>
 
 <p>
-Many thanks go to ANNO for agreeing for me to further develop Text::Table.
+Many thanks go to ANNO for agreeing that I further develop Text::Table.
 </p>
 
 <p>
@@ -137,6 +139,11 @@ Add some more tests.
 </li>
 
 </ol>
+
+<p>
+Contributions are naturally welcome, just fork the github repository and send
+me a pull request. (Or patches are also OK.)
+</p>
 
 </div>
 
