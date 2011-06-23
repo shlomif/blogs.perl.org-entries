@@ -173,22 +173,114 @@ negotiate a price. I hope everybody enjoys the YAPCs.
 
 </div>
 
-<div class="deprecated">
+<div class="entry" id="resuming-maintenance-of-xml-libxml">
+
+<ul class="info">
+<li><b>Date:</b> 20-06-2011</li>
+<li class="tags">XML, libxml, CPAN</li>
+</ul>
+
+<h1>Resuming Maintenance of XML-LibXML</h1>
+
 <p>
-My name is Shlomi Fish and you can learn more about me from the various
-pages of my <a href="http://www.shlomifish.org/">home site - 
-www.shlomifish.org</a> and
-from <a href="http://search.cpan.org/~shlomif/">my CPAN page</a>. I learnt
-Perl in 1996, in order to start working for the now mostly defunct Cortext Web
-Design, and then used it to write CGI scripts, and for 
-shell-scripts-written-in-Perl, after using DOS and some early versions of
-Windows and learning a little GW-BASIC, QBasic, C, what was then C/C++ and 
-some 
-<a href="http://en.wikipedia.org/wiki/Visual_Basic_for_Applications">Visual 
-Basic for Applications</a>. I fell in love with both Perl 5 and
-UNIX-like operating systems, and been using them ever since.
+For a long while, work on the 
+<a href="http://beta.metacpan.org/release/XML-LibXML">XML-LibXML
+CPAN module</a> halted as the existing maintainer was busy.
+After <a href="http://code.activestate.com/lists/perl-xml/8885/">a 
+discussion</a> on the Perl-in-XML mailing list, some people and I were
+given co-maintainer status and we resumed its maintenance inside
+<a href="https://bitbucket.org/shlomif/perl-xml-libxml">a Bitbucket.org
+Mercurial repository</a>. 
+</p>
+
+<p>
+So far what I did, was fix some low-hanging fruit 
+bugs, apply some patches, as well as start the long process of converting
+the test suite, which still uses Test.pm to 
+<a href="http://beta.metacpan.org/module/Test::More">Test::More</a> . There are
+still many bugs lurking there, and some of them are XS bugs that are still
+beyond my reach, and I could use some assistance there. But it's a start.
+</p>
+
+<p>
+If you're interested in helping, the clone the repository, write a patch and 
+send me a pull request.
+</p>
+
+<p>
+<b>Text::Table Update:</b> I've written about
+<a href="http://blogs.perl.org/users/shlomi_fish/2011/04/introduction-to-blogsperlorg-texttable.html">resuming 
+the maintenance of Text::Table</a> in April, and it progressed nicely:
+the tests were converted to Test::More, a lot of the code was cleaned up, 
+the build system was converted to Module::Build, and keywords and resource
+URLs were defined, and some bugs were solved (along with tests). I'm still 
+looking into ways to clean up the code, and if anyone has an idea for a cool
+feature, then they should drop me a line (or provide a patch).
 </p>
 
 </div>
+
+<div class="entry" id="convert-away-from-Test.pm">
+
+<ul class="info">
+<li><b>Date:</b> 23-06-2011</li>
+<li class="tags">QA, PPI, Perl</li>
+</ul>
+
+<h1>PPI-Based Script to Convert Test.pm-based Test Programs to Test::More</h1>
+
+<p>
+Some CPAN modules I inherited still used the old
+<a href="http://search.cpan.org/perldoc?Test">Test.pm</a> for some of their
+<tt>t/*.t</tt> scripts instead of the more modern 
+<a href="http://en.wikipedia.org/wiki/Test::More">Test::More</a>. The latter
+fact annoys me to no end because Test.pm is very limited. In 
+<a href="http://beta.metacpan.org/release/Config-IniFiles">Config-IniFiles</a>
+I did the conversion manually and the hard way. Then I 
+<a href="http://blogs.perl.org/users/shlomi_fish/2011/06/resuming-maintenance-of-xml-libxml.html">started 
+working on XML-LibXML</a> which has over 40 of those pesky Test.pm scripts, and 
+I did not have the nerve to do all the manual and menial work.
+</p>
+
+<p>
+As a result, I ended up spending a few hours studying
+<a href="http://beta.metacpan.org/release/PPI">PPI</a> (the Perl Parsing
+Interface) and writing
+<a href="http://www.shlomifish.org/open-source/projects/Test.pm-Converter/">a 
+script</a> to automatically convert Test.pm-based scripts to Test::More. The 
+main issue at hand was that in Test.pm, a single argument <tt>ok()</tt>
+tests for the scalar's truth, while a double argument <tt>ok()</tt> tests for 
+simple equivalence (similarly to Test::More's <tt>is()</tt>). Eventually, I got 
+the script working, with some limitations (see <a 
+href="http://www.shlomifish.org/open-source/projects/Test.pm-Converter/">the page</a>).
+</p>
+
+<p>
+So what was my impression of PPI? It naturally seems more robust than using
+regular expressions and hacks to process Perl code, but there were a few quirks.
+For example, a PPI 
+<a href="http://beta.metacpan.org/module/PPI::Structure::List">list</a> contains
+an array of its contents, and the commas are part of them, as are the 
+various other tokens in the sub-expressions. Therefore, divining the count of 
+the  arguments is pretty hard. I would have expected to get a more Abstract 
+Syntax Tree of the arguments, and since I didn't I had to workaround it with an 
+ugly kludge.
+</p>
+
+<p>
+Furthermore, after stringifying the document object, the contents of the 
+<a href="http://en.wikipedia.org/wiki/Here_document">here-documents</a> were
+not included in the output from some reason, but I may have done something
+wrong. I also wish the PPI PODs contained more meaningful examples.
+</p>
+
+<p>
+Nevertheless, my script is mostly working now and I can utilise it to
+"test-lift" legacy test programs. It may prove useful to you too, and feel free
+to use it. 
+</p>
+
+</div>
+
 </body>
 </html>
