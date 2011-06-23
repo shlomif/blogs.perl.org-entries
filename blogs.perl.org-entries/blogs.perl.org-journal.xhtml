@@ -234,9 +234,9 @@ Some CPAN modules I inherited still used the old
 <a href="http://search.cpan.org/perldoc?Test">Test.pm</a> for some of their
 <tt>t/*.t</tt> scripts instead of the more modern 
 <a href="http://en.wikipedia.org/wiki/Test::More">Test::More</a>. The latter
-fact annoys me to no end because Test.pm is very limited. In 
-<a href="http://beta.metacpan.org/release/Config-IniFiles">Config-IniFiles</a>
-I did the conversion manually and the hard way. Then I 
+fact annoys me to no end because Test.pm is very limited. When I worked on
+<a href="http://beta.metacpan.org/release/Config-IniFiles">Config-IniFiles</a>,
+I did the conversion manually, which was a lot of work. Now I 
 <a href="http://blogs.perl.org/users/shlomi_fish/2011/06/resuming-maintenance-of-xml-libxml.html">started 
 working on XML-LibXML</a> which has over 40 of those pesky Test.pm scripts, and 
 I did not have the nerve to do all the manual and menial work.
@@ -262,8 +262,8 @@ For example, a PPI
 <a href="http://beta.metacpan.org/module/PPI::Structure::List">list</a> contains
 an array of its contents, and the commas are part of them, as are the 
 various other tokens in the sub-expressions. Therefore, divining the count of 
-the  arguments is pretty hard. I would have expected to get a more Abstract 
-Syntax Tree of the arguments, and since I didn't I had to work around it with an 
+the  arguments is pretty hard. I would have expected to get a more <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract 
+syntax tree</a> of the arguments, and since I didn't I had to work around it with an 
 ugly kludge.
 </p>
 
