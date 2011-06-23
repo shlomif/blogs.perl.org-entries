@@ -245,7 +245,7 @@ I did not have the nerve to do all the manual and menial work.
 <p>
 As a result, I ended up spending a few hours studying
 <a href="http://beta.metacpan.org/release/PPI">PPI</a> (the Perl Parsing
-Interface) and writing
+Interface), and writing
 <a href="http://www.shlomifish.org/open-source/projects/Test.pm-Converter/">a 
 script</a> to automatically convert Test.pm-based scripts to Test::More. The 
 main issue at hand was that in Test.pm, a single argument <tt>ok()</tt>
@@ -258,13 +258,13 @@ href="http://www.shlomifish.org/open-source/projects/Test.pm-Converter/">the pag
 <p>
 So what was my impression of PPI? It naturally seems more robust than using
 regular expressions and hacks to process Perl code, but there were a few quirks.
-For example, a PPI 
+For example, a PPI
 <a href="http://beta.metacpan.org/module/PPI::Structure::List">list</a> contains
 an array of its contents, and the commas are part of them, as are the 
 various other tokens in the sub-expressions. Therefore, divining the count of 
 the  arguments is pretty hard. I would have expected to get a more <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract 
-syntax tree</a> of the arguments, and since I didn't I had to work around it with an 
-ugly kludge.
+syntax tree</a> of the arguments, and since I didn't I had to work around
+it with an ugly kludge.
 </p>
 
 <p>
