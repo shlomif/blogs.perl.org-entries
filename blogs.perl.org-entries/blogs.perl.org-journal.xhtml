@@ -282,5 +282,299 @@ in case you need it, and patches to fix its limitations would be welcome.
 
 </div>
 
+<div class="entry" id="Inline-C">
+
+<ul class="info">
+<li><b>Date:</b> 09-11-2011</li>
+<li class="tags">Perl, QA, XS, Inline, C, ctypes, gcc</li>
+</ul>
+
+<h1>My Experience with Inline::C</h1>
+
+<p>
+I know I didn’t write here for a long time, and I apologise for it, but I have
+this entry and another one in mind and I hope they can compensate for it.
+</p>
+
+<p>
+For my work on <a href="http://fc-solve.shlomifish.org/">Freecell Solver</a>,
+I’ve written some code for encoding and decoding game positions into a 
+compact format, by encoding them as a delta from the position of origin. I 
+first wrote it in Perl, in order to prototype it, and later
+translated it to C (which is the language that Freecell Solver is written in).
+I have written some rudimentary unit tests for it, but also wanted to test the 
+code against a large number of positions, by runnign it over the solutions of
+many Freecell deals. 
+</p>
+
+<p>
+The encoding rearranges the order of the card columns and the freecells, so 
+testing that the output test is correct requires calculating that arrangement.
+This was also done by the Perl code. I decided to write a small wrapper for
+an encoding+decoding round-trip in C, and use it from a Perl program I was 
+writing. So far so good. 
+</p>
+
+<p>
+I first looked at <a href="https://gitorious.org/perl-ctypes">the 
+Perl version of Ctypes</a>, but it failed a large number of its assertions
+on my system, so I could not really trust it. Then I looked at 
+<a href="http://search.cpan.org/perldoc?Inline::C">Inline::C</a>. I could
+not understand from its main page, how to return an <tt>SV *</tt> containing
+a string from it, but this was covered in the extensive
+<a href="http://search.cpan.org/perldoc?Inline::C-Cookbook">Inline::C 
+cookbook</a> and I wrote this Inline::C function:
+</p>
+
+<pre>
+extern char * fc_solve_user_INTERNAL_delta_states_enc_and_dec(
+    const char * init_state_str_proto,
+    const char * derived_state_str_proto
+    );
+
+SV* enc_and_dec(char * init_state_s, char * derived_state_s) {
+    SV * ret;
+    char * s;
+    s = fc_solve_user_INTERNAL_delta_states_enc_and_dec(init_state_s, derived_state_s);
+
+    ret = newSVpv(s, 0);
+    free(s);
+    return ret;
+}
+</pre>
+
+<p>
+I don't need to use “sv_2mortal” there because Inline::C does that for us.
+Then I tried to test it. It failed with this error:
+</p>
+
+<pre>
+perl: symbol lookup error: /home/shlomif/progs/freecell/trunk/fc-solve/source/_Inline/lib/auto/Mega_Test_for_C_delta_states_pl_9385/Mega_Test_for_C_delta_states_pl_9385.so: undefined symbol: fc_solve_user_INTERNAL_delta_states_enc_and_dec
+</pre>
+
+<p>
+I was familiar with errors like that, but it took me over an hour of playing
+with the various Inline::C configuration options, and trying to figure out 
+why it didn’t link against the relevant Freecell Solver library to realise
+what the problem was. It was that the library in question did not export the
+symbol, and gcc realised it didn't give the XS extension anything and omitted 
+it.
+</p>
+
+<p>
+After fixing this line in my C source:
+</p>
+
+<pre>
+char * DLLEXPORT fc_solve_user_INTERNAL_delta_states_enc_and_dec(
+</pre>
+
+<p>
+To this line:
+</p>
+
+<pre>
+DLLEXPORT char * fc_solve_user_INTERNAL_delta_states_enc_and_dec(
+</pre>
+
+<p>
+Everything worked properly, and I was able to run the so-called “mega-test”.
+</p>
+
+<p>
+If you’re having similar problems with Inline::C, you should try to add
+<tt>CLEAN_AFTER_BUILD =&gt; 0</tt> to its configuration. It ended up clarifying
+a lot for me.
+</p>
+
+<p>
+Cheers!
+</p>
+
+</div>
+
+<div class="entry" id="exec-portability">
+
+<ul class="info">
+<li><b>Date:</b> 09-11-2011</li>
+<li class="tags">exec, perl, portability, whitespace, windows, unix</li>
+</ul>
+
+<h1>exec's portability</h1>
+
+<p>
+Pop quiz! What does this perl 5 program prints when executed with no
+arguments?
+</p>
+
+<pre>
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+if (! @ARGV)
+{
+    exec($^X, $0, "hello world");
+}
+else
+{
+    my $arg = shift(@ARGV);
+    print "Got &lt;$arg&gt;\n";
+    if (@ARGV)
+    {
+        print "Other args are &lt;@ARGV&gt;\n";
+    }
+}
+</pre>
+
+<p>
+The answer is “it depends.”. On my Linux system it prints 
+“Got &lt;hello world&gt;”, while on Windows, using Strawberry Perl, it
+prints “Got &lt;hello&gt;” and later on that the other args are “world”.
+</p>
+
+<p>
+I would expect the Linux behaviour were every argument passed to the list 
+<a href="http://perldoc.perl.org/functions/exec.html">exec</a> arrives as
+one argument to <tt>@ARGV</tt> regardless of whitespace as the correct. It
+also the behaviour exhibited on both operating systems using 
+<a href="http://perldoc.perl.org/functions/system.html">system</a>. Is this
+a bug?
+</p>
+
+<p>
+<a href="http://perldoc.perl.org/perlport.html">perlport</a> only has this
+to say about whitespace: <q>Whitespace in filenames is tolerated on most
+systems, but not all, and even on systems where it might be tolerated, some
+utilities might become confused by such whitespace.</q>.
+</p>
+
+<p>
+I discovered this strange mis-behaviour when working on a commission for
+a client who is Windows-based.
+</p>
+
+</div>
+
+<div class="entry" id="telaviv_pm_2011_Nov_report">
+
+<ul class="info">
+<li><b>Date:</b> 01-12-2011</li>
+<li class="tags">Perl, Mongers, Tel Aviv, Israel, meeting, DBI, DBIx-Class, local-lib, perlbrew, cpanminus, CPAN, Firebird, SQL</li>
+</ul>
+
+<h1>Report on the Latest Tel Aviv Perl Mongers Meeting</h1>
+
+<p>
+I attended the latest
+<a href="http://telaviv.pm.org/">Tel Aviv Perl Mongers (TelAviv.pm)</a>
+meeting the other
+day, and am writing this report in order to encourage other people (and more)
+to come. We didn't have meetings in September or October due to the Jewish
+holidays, and some renovations on the site, so it was good to finally have
+a meeting.
+</p>
+
+<p>
+Before the meeting, I had helped publicise it on various online news channels,
+and thankfully quite a few people (about 20-30) came. I had a previous 
+appointment that day at 12:00 and so returned home where I ate, worked on
+the computer and rested before the TelAviv.pm meeting.
+</p>
+
+<p>
+After I took the bus, I arrived there a few minutes earlier, and met a fellow
+Perl monger on the way. We found the room with some difficulty (as there were
+very few signs outside the rooms' doors) and arrived there. Several people 
+including  <a href="http://szabgab.com/">Gabor</a> were already there, and
+they were discussing the upcoming Israeli Perl Workshop in February. In any
+case, I decided to walk to the nearby 
+grocery store to buy some refreshments for the meeting, and when I returned
+there were more people in the room.
+</p>
+
+<p>
+Quite a few people arrived relatively late, but the talks started mostly on
+schedule. The first talk (by Erez Schatz) was short, and it discussed some 
+recent tools that
+facilitate the Perl programmer’s life: <a href="http://search.cpan.org/dist/local-lib/">local-lib</a>, <a href="http://www.perlbrew.pl/">perlbrew</a>, cpanm
+and pm-uninstall. The talk was very fun, and he ended up covering some other
+tools in brief in the last slide. I’m still not convinced that I should use
+CPAN-Minus instead of my CPANPLUS (especially given 
+<a href="http://search.cpan.org/dist/CPANPLUS-Dist-Mageia/">CPANPLUS-Dist-Mageia</a> 
+and friends), but I still like perlbrew and local::lib and pm-uninstall seems 
+useful.
+</p>
+
+<p>
+Erez mentioned that on Perl forums there were several very common and hated 
+questions like “How do I uninstall a perl module?” or “How can I use
+CPAN without root?” and that these technologies cover these needs precisely.
+</p>
+
+<p>
+After this talk, Erez gave a longer talk about DBIx-Class, which is an
+Object-Relational Mapper (ORM) for Perl. For the demo, he used a company
+whose employees are dogs, and gave many pictures of dogs in suits (some of
+them pretty scary). There were a few glitches in the demonstration, but they
+were promptly overcome, and the <tt>DBIC_TRACE=1</tt> flag was a big help.
+One bug in the code was that instead of updating the employee's department
+(by looking it up by name), the department's name was updated (globally). I
+any case, it was an enjoyable talk, but the person who sat next to me said
+that she didn’t like it because she used to be a DBA, and she was worried about
+performance.
+</p>
+
+<p>
+Erez mentioned that DBIx-Class was the “Elephant in the Room” of Perl ORMs,
+which I had concluded was the case as well.
+</p>
+
+<p>
+After that talk, there was a break, where people got to eat more of my
+cookies, and to chat, and afterwards, Ido Kanner presented about 
+<a href="http://www.firebirdsql.org/">Firebird SQL</a>. It was a good talk,
+and he drew some comparisons between Firebird and SQLite, MySQL and
+PostgreSQL. Firebird looks interesting, and it also has embedded (like
+SQLite) and read-only modes.
+</p>
+
+<p>
+One problem during the talk was that the projector kept shutting down,
+and it took us some trouble to restart it. We hoped this problem would be
+resolved in upcoming meetings.
+</p>
+
+<p>
+After the meeting, some of us (about 10) went to Spaghettim (a Pasta/etc. 
+place) and had dinner. We chatted about Atheism, Cable company tech-support,
+GNOME 3 and KDE 4, and lots of other stuff.
+</p>
+
+<p>
+To sum up, it was a very enjoyable meeting, and I’m looking forward for
+more future ones. One thing notable about it is that this time Sawyer did not
+deliver a talk, which made him happy because other people volunteered to do
+so instead.
+</p>
+
+</div>
+
+<!-- TODO:
+* DBIx-Class.
+* What the person next to me said about not liking it because she used to be a
+DBA.
+* Dogs in suits.
+* Undesirable bugs in the demo.
+* ->update({ name => ... }) updating the department's name instead of the
+department field of the employee.
+* Firebird SQL.
+* Looks intersting.
+    - embedded/read-only modes.
+* The projector keeps shutting down.
+* Going to Spaghettim for Supper.
+* Chat about Atheism, Cable tech-support, etc.
+-->
 </body>
 </html>
