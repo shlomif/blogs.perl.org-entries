@@ -566,20 +566,121 @@ so instead.
 
 </div>
 
-<!-- TODO:
-* DBIx-Class.
-* What the person next to me said about not liking it because she used to be a
-DBA.
-* Dogs in suits.
-* Undesirable bugs in the demo.
-* ->update({ name => ... }) updating the department's name instead of the
-department field of the employee.
-* Firebird SQL.
-* Looks intersting.
-    - embedded/read-only modes.
-* The projector keeps shutting down.
-* Going to Spaghettim for Supper.
-* Chat about Atheism, Cable tech-support, etc.
--->
+<div class="entry" id="breaking_the_perl_debugger_for_fun_and_profit">
+
+<ul class="info">
+<li><b>Date:</b> 26-12-2011</li>
+<li class="tags">perl,debugger,debugging,refactoring,features,sopa,telaviv,mongers</li>
+</ul>
+
+<h1>Breaking the Perl Debugger for Fun and Profit</h1>
+
+<p>
+Before I cover the main topic of this entry, here are some short news and
+action items:
+</p>
+
+<ol>
+<li>
+<p>
+If you have not acted against 
+<a href="https://www.eff.org/deeplinks/2011/12/fight-blacklist-toolkit-anti-sopa-activists">SOPA
+- the proposed online blacklist/censorship bill</a>, you should. Follow the
+link for information on how to act against it.
+</p>
+</li>
+<li>
+<p>
+I have announced the
+<a href="http://shlomif-tech.livejournal.com/60825.html">next Tel Aviv
+Perl Mongers meeting</a> on my technical journal on LiveJournal.com. It will
+take place this Wednesday, on 28 December, 2011. More information in the link.
+</p>
+</li>
+
+<li>
+<p>
+<a href="http://golf.shinh.org/">Anarchy Golf</a> is a new server for Code Golf,
+which are online programming competitions for implementing code as shortly as
+possible. It supports Perl 5, Perl 6 and many other languages. There is 
+<a href="http://golf.shinh.org/p.rb?Starburst">an active challenge</a>, where
+the only Perl 5 submission so far is mine, so I could use some competition.
+</p>
+</li>
+</ol>
+
+<p>
+Now for the main topic of the post. Recently, three patches were integrated
+into the perl-5 core implementing new features in the perl debugger:
+</p>
+
+<ol>
+<li>
+<a href="http://www.nntp.perl.org/group/perl.perl5.porters/2011/04/msg171038.html">Add "b &lt;filename&gt;:&lt;line&gt; &lt;cond&gt;" to perl -d</a> by me.
+</li>
+<li>
+<a href="http://www.nntp.perl.org/group/perl.perl5.porters/2011/08/msg176454.html">Add enable/disable commands for breakpoints in perl -d</a> also by me.
+</li>
+<li>
+<a href="https://rt.perl.org/rt3/Public/Bug/Display.html?id=104168">"Trace to max depth"</a> by Peter Scott.
+</li>
+</ol>
+
+<p>
+When Father Chrysostomos tried to apply the first patch, he noticed its tests
+started failing. Apparently, the breakpoint functionality (irrespective of
+the patch's added functionality) became broken in bleadperl, due to a change
+in the internals, and it wasn't caught by the debugger's existing tests. I
+ended up submitting another patch to add a test for some of the existing
+breakpoint functionality.
+</p>
+
+<p>
+The other two patches passed all of their own tests and the existing ones, but
+that wasn't the end of the story. A short time afterwards 
+<a href="https://rt.perl.org/rt3/Public/Bug/Display.html?id=104820">a
+regression was reported in the debugger</a>, which was caused by one of the
+patches that I introduced. While, I fixed it with a test, it was soon followed
+by other reports and fixes. None of these bugs were caught by the test suite
+of the perl debugger, which is incredibly incomplete.
+</p>
+
+<p>
+Another E-mail that caused an active discussion was 
+<a href="http://www.nntp.perl.org/group/perl.perl5.porters/2011/11/msg179847.html">my
+proposal to add strict and warnings to lib/perl5db.pl</a>, in which someone
+kept arguing against it, and eventually said he confused it (it being the
+defualt command-line debugger front-end) with the debugger's guts, and ended
+up also supporting adding "use strict;". 
+</p>
+
+<p>
+I ended up working on adding "strict" to the debugger on a git branch, and
+was eventually successful (though I temporarily broken no-strict code on the
+debugger evaluated lines, to which I added a test.). RJBS (the current
+pumpking) said he'd like to integrate this patch only after perl-5.16.x
+is released.
+</p>
+
+<p>
+The morals of this story is that the perl debugger needs more tests, and
+that trying to enhance it can easily break it. I started 
+<a href="https://github.com/shlomif/perl/tree/perl-d-add-tests-3">a branch
+on GitHub</a> where I've been committing more tests to the perl debugger
+to enhance its coverage.
+</p>
+
+<p>
+There's also a Google Code-In task for devising a strategy to do that, and
+I've volunteered to mentor it. All this will hopefully result in less breakage
+in the future.
+</p>
+
+<p>
+Happy Holidays, and a Happy New Year.
+</p>
+
+</div>
+
 </body>
 </html>
