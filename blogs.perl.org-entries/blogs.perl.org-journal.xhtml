@@ -682,5 +682,277 @@ Happy Holidays, and a Happy New Year.
 
 </div>
 
+<div class="entry" id="report_on_israeli_perl_workshop_2012">
+
+<ul class="info">
+<li><b>Date:</b> 27-03-2012</li>
+<li class="tags">perl, workshop, israel, events, 2012</li>
+</ul>
+
+<h1>Report on the Israeli Perl Workshop 2012</h1>
+
+<p>
+Well, I've got a lot of stuff I’d like to blog about in the various blogs of
+mine, and so I’m starting with this report on the 
+<a href="http://act.perl.org.il/ilpw2012/">Israeli Perl Workshop of 2012</a>,
+which had taken place in 28 February, 2012. Moreover, April Fools' Day is 
+approaching, and I had an idea for a Perl-related April Fools' gag, but after
+telling it to RJBS (the current Perl pumpking), he and I agreed that it would
+hit too many nerves. (PerlJam on IRC said he liked it, though). Maybe I’ll 
+publish it on 2 April with a big disclaimer on top, just for kicks.
+</p>
+
+<p>
+Anyway, here is the report. I had originally posted it to the Perl in Israel
+mailing list for review, but did not get any reviews, so it may not be too
+letter-perfect, but I guess that’s life.
+</p>
+
+<p>This is my report about the 
+<a href="http://act.perl.org.il/ilpw2012/">Israeli Perl Workshop of 2012</a> . It was
+a fun and educational event, and I'm glad I was able to attend it. For better
+or for worse, all the talks I attended were in Room 1, but I was still able
+to hear the ends of a few talks in Room 2 (because the corresponding talks
+in Room 1 ended before them).</p>
+<p>I set up an alarm the night before in order to wake up early in time for the
+event, and ended up waking up some time before it (and even the alarm time was
+much earlier than what I was used to). Then I made some preparations, ate
+breakfast, and caught the appropriate bus. After I walked from the bus station
+to Shenkar, it took me some time to find the place, because it wasn't the
+same entrance as our normal rooms, and the signs were confusing. What I needed
+to do was to take the stairs down to the yard, and then go to the organisation
+room, but it was hard to find.</p>
+<p>There I got my name sticker, the schedule, and some swag from booking.com. I’d
+like to thank <a href="http://www.booking.com/">Booking.com</a> for sponsoring the Israeli
+Perl Workshop 2012 (as well as having a presence there and giving some swag
+and chocolates), and they are looking for software developers with Perl
+experience to relocate to Amsterdam, so please consider working for them.</p>
+<p>In the yard, I met a few people including 
+<a href="http://search.cpan.org/~flora/">Florian Ragwitz</a> (a.k.a &quot;FLORA&quot; on CPAN or
+&quot;rafl&quot; on IRC - he has many cool modules there, including quite a few XS ones),
+who was one of the workshop’s visitors from Germany. Despite being German, his
+English accent sounded English to us. Later on we discussed accents in English 
+and he noted that the accents of some Israelis he met sounded like French to 
+him (while ours seemed less so). This is strange, because Israelis can
+distinguish between a French accent in English and an Israeli Hebrew accent in
+English. </p>
+<p>Anyway, Florian told me that he is planning on reviewing and pulling my
+Test::Aggregate GitHub pull request Real Soon Now™, a fact which has brought
+me some relief, because I've tried to contact him on IRC and ask him if he
+remembers.</p>
+<p>For better or for worse, all the talks that I preferred to hear took place in
+room #1 (while sometimes visiting Room #2) to hear the ends of talks. I still
+would be happy to hear many of the talks that took place in Room #2 in the
+normal Tel Aviv Perl Mongers meetings, or alternatively, those talks in room #1
+which lacked enough time to be conveyed satisfactorily.</p>
+<p>The first talk in the day was 
+<a href="http://search.cpan.org/~eilara/">Ran Eilam</a>’s talk about &quot;Syntactic Sugar 
+causes Cancer of the Semicolon”, which had to be trimmed towards the end, 
+because
+the introduction may have taken too long. The talk was interesting starting
+from an example of <code>ptr-&gt;val</code> being sugar in the C programming language
+for <code>(*ptr).val</code> and continuing to further examples. Ran raised the issue
+of whether syntactic sugar was important or not, which turns out to not be
+a straightforward question. He then demonstrated some modules for syntactic
+sugar on CPAN.</p>
+<p>I hope Ran can give a rerun of it on one of the mongers' meetings with more
+time allocated for that.</p>
+<p>After that I attended the talk of Stefan Hornburg (“racke”, known as
+<a href="http://search.cpan.org/~hornburg/">HORNBURG on CPAN</a>) who was another
+visitor from Germany, about
+<a href="http://act.perl.org.il/ilpw2012/talk/3955">Template::Flute</a> which is a
+designer’s friendly template system. In this template, one uses an HTML file
+with standard HTML attributes for designating the fields that needs to be
+replaced, and then an XML specification file that specifies how to process 
+the HTML (and in addition one uses Perl to give it data). As a result the 
+designers can manipulate the HTML with their own tools, while still
+allowing the programmers to populate it with data.</p>
+<p>This seems like an interesting and potentially useful tool, but it’s
+less expressive than template systems such as Template Toolkit. After the talk,
+another attendee whom we talked in private questioned the need for both the
+HTML file and the XML specification, but I didn't find a way to avoid it
+given the constraints that the HTML will be valid HTML 4/XHTML 1.</p>
+<p>The next talk about Time Management in Software Projects was cancelled because
+the presenter did not come (due to lack of time management as we joked then).
+I was able to catch a glimpse of the end of 
+<a href="http://corky.net/dotan/">Dotan Dimet</a>’s “Perl and JavaScript:
+bioinformatics in a browser window” talk, but I don’t remember a lot of
+it except for a small amount of demonstration.</p>
+<p>The talk about Zero to CPAN was eventually given by 
+<a href="http://blogs.perl.org/users/sawyer_x/">Sawyer</a> instead of by
+<a href="http://blogs.perl.org/users/erez_schatz/">Erez Schatz</a>. It was a nice one, and I’ve learned about 
+<a href="http://metacpan.org/release/CPAN-Changes">the CPAN-Changes module</a> there
+(after Florian mentioned it, though). Sawyer covered the way to get to a
+working CPAN-like distribution from scratch using tools such as
+module-starter and explained what every file in the CPAN module hierarchy
+does, and demonstrated some test-driven-development. I knew most of it already,
+but it was still a fun talk.</p>
+<p><a href="http://www.linkedin.com/in/amirfr">Amir Friedman</a>‘s talk about software 
+configuration management (SCM) came next, 
+and he discussed some open-source solutions for the various parts of SCM,
+which include version control, release management, task management, and
+project management. He recommended Gitflow (which we had a talk about
+on the Tel Aviv mongers mailing list) for version control and release
+management, and a different solution called Jenkins for issue tracking (if
+I remember correctly). I then asked what he thought of integrated “all-in-one”
+solutions for SCM, and he said that those were pricey and he did not have
+any significant experience with them.</p>
+<p>The lunch break came next and I overheard a talk between two other people
+about teaching English to speakers of non-English languages. One of them
+said that he once worked with some Spanish Electrical Engineers and that they
+were “completely isolated” from the rest of the world because they didn’t
+read the literature in English. Then we discussed whether it was economical
+to teach English to hundreds of millions of speakers of Spanish, or whether
+we should expect most things to be translated. It was compared to the
+“give a man a fish” vs. “teach a man to fish”. We also discussed the fact that
+Dutchmen tended to have very good English, and one of the other people
+commented that it was true, but that they still tended to prefer using
+software with Dutch localisation.</p>
+<p>I’ve also talked with Sawyer about his upcoming 
+<a href="http://act.perl.org.il/ilpw2012/talk/3936">“CGI.pm MUST DIE!” talk</a>. He
+said that he needs to become mentally energised for that talk because he
+feels strongly about it and wants to convey the energy. He passed an
+anecdote from a conference in Europe, in which he had given a talk about
+Dancer, and said he was so emotional then that people said “You must
+see him” and rushed to see his other talk. Moreover, afterwards, when asked
+who were the two best presenters in the conference, they said “[Someone
+very famous] and that Dancer guy”.</p>
+<p>The anti-CGI.pm presenting was indeed energetic and emotional, but kinda fell
+below my expectations due to the yard talk that preceded it. It was still
+pretty informative. Dotan Dimet later took the stage for the rebuttal
+of “CGI.pm - the only web development framework you’ll ever need” which was
+less emotional but still interesting. I was not convinced that CGI.pm’s
+HTML generation routines were a good way to do output HTML (I never really
+liked them), so I may have been more convinced by Sawyer.</p>
+<p><a href="http://www.ynonperek.com/">Ynon Perek</a>’s 
+<a href="http://act.perl.org.il/ilpw2012/talk/3977">talk</a> about
+“Implementing Perl (Moose) Design Patterns” came next, which was interesting,
+but again lacked adequate time to cover everything, and I hope will be given
+with less time constraints. One anecdote from there was that Ynon said there
+where three primary ways for polymorphism in Perl: Inheritance (“is-a”), 
+Roles/Traits (“does-a”) and Containment/Delegation (“has-a”) and that
+he could no longer recommend inheritance (but did not get to explain why not
+from what I recall).</p>
+<p>In any case, I was surprised at Ynon’s implementation of the Factory
+pattern, and don’t remember the implementation given by him.</p>
+<p>Next came Tamir Lousky’s 
+<a href="http://act.perl.org.il/ilpw2012/talk/3953">talk</a> about generating vector 
+graphics with Perl and SVG. Its slides contained a lot of very nice eye candy. 
+The introduction
+to SVG and generating it was quite rudimentary, and did not cover the full
+potential of SVG. The demonstration and explanation of the module for
+generating random trees using SVG was interesting.</p>
+<p><a href="http://act.perl.org.il/ilpw2012/talk/3959">David Tabachnikov</a>’s next gave an
+interesting talk called “Scaling Up”. He
+contrasted optimisation (which makes your code run faster with the existing
+resources) to vertical scaling (= buying faster computers) to Horizontal
+scaling (= buying more hardware). He also noted that there’s some speed
+difference between the various SQL databases, but he did not encounter a
+situation where it would have made too much difference.</p>
+<p>The last feature of the evening were the lightning talks. I recall a talk
+by Florian Ragwitz about Google Code-In and Google Summer-of-Code. I also
+recall <a href="http://szabgab.com/">Gabor</a>’s talk about surviving in an uncooperative 
+workplace. He said
+that if the workplace does not practise best practices such as using version
+control systems or writing automated tests, one can create their own
+small island of sanity where they make use of that on their own, and gradually
+convince the rest of the organisation that it’s beneficial.</p>
+<p>After the lightning talks, some people went to a local restaurant for dinner,
+but I decided against it because I was too tired from waking up early. As a
+result, I found someone who drove up north to drive me home, and got home.</p>
+<p>In the schedule I noticed that one could go to a certain URL at 
+<a href="http://www.oreilly.com/">O’Reilly</a> and
+receive a free E-book of their choice. I used this opportunity to get the book
+<a href="http://shop.oreilly.com/product/9780596510046.do">Beautiful Code</a> , which
+I have started reading.</p>
+<p>The day was exhausting but very fun, and I enjoyed all the talks I attended.
+I’d like to thank the organisers of the event and most notably 
+<a href="http://szabgab.com/">Gabor Szabo</a> and Sawyer X, 
+<a href="http://www.shenkar.ac.il/">Shenkar college</a> for providing the venue,
+<a href="http://www.booking.com/">Booking.com</a> for the sponsorship, O’Reilly for
+the free book presents, the foreign guests who came to present and to attend,
+and all the other presenters, who volunteered to give talks.</p>
+<p>I hope we can repeat this the next year.
+</p>
+
+</div>
+
+<div class="entry" id="the_perl_april_fools_that_could_have_been">
+
+<ul class="info">
+<li><b>Date:</b> 09-04-2012</li>
+<li class="tags">perl, april fools, joke</li>
+</ul>
+
+<h1>The Perl April Fools' Gag That Could Have Been</h1>
+
+<p>
+On my <a href="http://blogs.perl.org/users/shlomi_fish/2012/03/report-on-the-israeli-perl-workshop-2012.html">last entry</a>,
+I told you that I have had an idea for a Perl-related April Fools’ day gag,
+and that I would possibly reveal it on 2-April with a big disclaimer
+on top, just for kicks. Well, it’s already 9-April, but I guess it is better
+late than never, right?
+</p>
+
+<p>
+OK, here is the big disclaimer: <b>THIS IS A JOKE. IT’S NOT SERIOUS. SO
+RELAX - IT IS NOT GOING TO HAPPEN SOON (AND HOPEFULLY WILL NOT EVER
+HAPPEN).</b>.
+</p>
+
+<p>
+OK, now let’s move on to the gag itself:
+</p>
+
+<blockquote>
+<p>
+1 April 2012, Tel Aviv, Israel: the Perl foundation has announced today
+that by inspiration from Mozilla Firefox, the perl-porters (formerly known
+as perl5-porters) will adopt a schedule of a quarterly major release.
+</p>
+
+<p>
+“Since version 6 of Perl has been claimed by a malevolent project that
+amounted to very little, we will release Perl version 7 next Summer, followed
+by Perl 8 in next Fall, and Perl 9 next Winter.” said the designated Perl 
+pumpking.The Perl foundation commented that it is sure that users will 
+appreciate the accelerated release schedule, despite the fact that a lot
+of backwards’ compatibility will be broken in each release to further
+the language’s improvement.
+</p>
+
+<p>
+Some prominent Perl porters have added that they are looking into ways
+to automatically upgrade the Perl version automatically upon new
+releases, similar to the approach followed by the Google Chrome browser.
+“We are tired of people using outdated versions of Perl, which results in
+a maintenance burden for us, to say nothing of the security risk by bugs in
+old Perl versions. So we think the best way to mitigate that would be to
+simply force people to upgrade.”
+</p>
+
+<p>
+The Perl porters are hard at work on perl-7.0.0, which will implement the
+upcoming Perl 7 specification with many new and exciting features and
+incompatibilities. 
+</p>
+
+</blockquote>
+
+<p>
+Well, like I said, after discussing this idea with 
+<a href="http://rjbs.manxome.org/">RJBS</a> (the current Perl 5 Pumpking),
+he and I agreed that it would be too cruel, given that many people 
+are sensitive about upgrading their versions of Perl 5. Comparisons of how
+old the perl that your workplace/client/etc. has deployed on their systems
+is a common source of discussion among perl mongers (and someone told me
+one of his clients still used perl 4), and many people would have found
+such an announcement alarming instead of funny. But I hope you enjoyed reading
+it, and hope you're also looking forward to perl-5.16.0, which should be out
+soon.
+</p>
+
+</div>
+
 </body>
 </html>
