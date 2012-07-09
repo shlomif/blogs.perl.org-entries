@@ -27,14 +27,14 @@ div.entry
 <h1>Introduction to blogs.perl.org + Text::Table</h1>
 
 <p>
-Hello, Perl bloggers! I decided to start 
-blogging about a most of my exclusively Perl-related stuff here on 
-blogs.perl.org, in hope of getting more comments 
-from active Perlers. (Until now, I've blogged about it 
+Hello, Perl bloggers! I decided to start
+blogging about a most of my exclusively Perl-related stuff here on
+blogs.perl.org, in hope of getting more comments
+from active Perlers. (Until now, I've blogged about it
 <a href="http://shlomif-tech.livejournal.com/">on
-my technical LiveJournal blog</a> and previously on 
+my technical LiveJournal blog</a> and previously on
 <a href="http://use.perl.org/~Shlomi+Fish/journal/">use.perl.org Journal</a>.).
-You can learn more about me on <a href="http://www.shlomifish.org/">my home 
+You can learn more about me on <a href="http://www.shlomifish.org/">my home
 site - www.shlomifish.org</a> .
 </p>
 
@@ -47,26 +47,26 @@ OK, having put that aside - let's move on to the main topic of this post.
 <p>
 Many months ago I wanted to use the
 <a href="http://search.cpan.org/dist/Text-Table/">Text::Table CPAN module</a>
-to present a table related to the meta-scan heuristics construction 
+to present a table related to the meta-scan heuristics construction
 scheme of <a href="http://fc-solve.berlios.de/">Freecell Solver</a>. Now,
-I wanted to present nicely formatted borders, using the 
-<a href="http://en.wikipedia.org/wiki/Box-drawing_characters">Unicode 
+I wanted to present nicely formatted borders, using the
+<a href="http://en.wikipedia.org/wiki/Box-drawing_characters">Unicode
 box-drawing characters</a> (which some people would recall from DOS).
 However, I found it difficult to specify the separators in the
 rulers properly based on their indices - they were assumed to be the
-same globally. As a result, I've written 
+same globally. As a result, I've written
 <a href="https://rt.cpan.org/Public/Bug/Display.html?id=61610">a patch</a>,
-and placed the modifications in 
+and placed the modifications in
 <a href="http://github.com/shlomif/Text-Table">a github repository</a>.
 </p>
 
 <p>
 The author of Text-Table (ANNO) told me he was working on a new version
 of Text-Table, which will contain many improvements. However, I was still
-interested in an enhanced version of the old Text-Table codebase with my 
-patch, and after talking on <a href="irc://irc.freenode.net/#perl">#perl</a>, 
+interested in an enhanced version of the old Text-Table codebase with my
+patch, and after talking on <a href="irc://irc.freenode.net/#perl">#perl</a>,
 ANNO said I could have co-maint
-on Text-Table-1.x and continue to improve it. The new Text-Table will be 
+on Text-Table-1.x and continue to improve it. The new Text-Table will be
 released under a separate namespace - <tt>Text::Table2</tt> or so.
 </p>
 
@@ -75,10 +75,10 @@ Many thanks go to ANNO for agreeing that I further develop Text::Table.
 </p>
 
 <p>
-Using my git repository, I did many cleanups, like add 
+Using my git repository, I did many cleanups, like add
 pod.t and pod-coverage.t, tweak the author information, add more strict and
-warnings to the file, etc. ANNO 's original licence is 
-<a href="http://perlbuzz.com/2009/07/help-end-licensing-under-same-terms-as-perl-itself.html">"Same 
+warnings to the file, etc. ANNO 's original licence is
+<a href="http://perlbuzz.com/2009/07/help-end-licensing-under-same-terms-as-perl-itself.html">"Same
 terms as Perl"</a>, but since it is an iffy licensing, I decided that all
 further changes will be under the terms of the Public-Domain/X11L/etc.. People
 who send me pull requests on github may wish to add their names to the credits
@@ -126,7 +126,7 @@ defining a Module-Build-based Build.PL file).
 </li>
 
 <li>
-Add URLs to the <tt>META.ym</tt>l - to the module's homepage, to the github repository, 
+Add URLs to the <tt>META.ym</tt>l - to the module's homepage, to the github repository,
 etc..
 </li>
 
@@ -157,16 +157,16 @@ me a pull request. (Or patches are also OK.)
 <h1>Transferring a Ticket to YAPC::Europe::2011</h1>
 
 <p>
-I originally planned to attend 
+I originally planned to attend
 <a href="http://yapceurope.lv/ye2011/">YAPC::Europe::2011</a> in Riga, Latvia
-(on 15-17 August, 2011), and so bought an early bird ticket, but will no 
-longer be able to attend due to personal reasons. As a result, I'm now seaking 
+(on 15-17 August, 2011), and so bought an early bird ticket, but will no
+longer be able to attend due to personal reasons. As a result, I'm now seaking
 to transfer the ticket to someone else, for the right price (which will be
 cheaper than what I bought it.).
 </p>
 
 <p>
-If you are interested, please 
+If you are interested, please
 <a href="http://www.shlomifish.org/me/contact-me/">contact me</a> and we will
 negotiate a price. I hope everybody enjoys the YAPCs.
 </p>
@@ -183,37 +183,37 @@ negotiate a price. I hope everybody enjoys the YAPCs.
 <h1>Resuming Maintenance of XML-LibXML</h1>
 
 <p>
-For a long while, work on the 
+For a long while, work on the
 <a href="http://beta.metacpan.org/release/XML-LibXML">XML-LibXML
 CPAN module</a> halted as the existing maintainer was busy.
-After <a href="http://code.activestate.com/lists/perl-xml/8885/">a 
+After <a href="http://code.activestate.com/lists/perl-xml/8885/">a
 discussion</a> on the Perl-in-XML mailing list, some people and I were
 given co-maintainer status and we resumed its maintenance inside
 <a href="https://bitbucket.org/shlomif/perl-xml-libxml">a Bitbucket.org
-Mercurial repository</a>. 
+Mercurial repository</a>.
 </p>
 
 <p>
-So far what I did, was fix some low-hanging fruit 
+So far what I did, was fix some low-hanging fruit
 bugs, apply some patches, as well as start the long process of converting
-the test suite, which still uses Test.pm to 
+the test suite, which still uses Test.pm to
 <a href="http://beta.metacpan.org/module/Test::More">Test::More</a> . There are
 still many bugs lurking there, and some of them are XS bugs that are still
 beyond my reach, and I could use some assistance there. But it's a start.
 </p>
 
 <p>
-If you're interested in helping, the clone the repository, write a patch and 
+If you're interested in helping, the clone the repository, write a patch and
 send me a pull request.
 </p>
 
 <p>
 <b>Text::Table Update:</b> I've written about
-<a href="http://blogs.perl.org/users/shlomi_fish/2011/04/introduction-to-blogsperlorg-texttable.html">resuming 
+<a href="http://blogs.perl.org/users/shlomi_fish/2011/04/introduction-to-blogsperlorg-texttable.html">resuming
 the maintenance of Text::Table</a> in April, and it progressed nicely:
-the tests were converted to Test::More, a lot of the code was cleaned up, 
+the tests were converted to Test::More, a lot of the code was cleaned up,
 the build system was converted to Module::Build, and keywords and resource
-URLs were defined, and some bugs were solved (along with tests). I'm still 
+URLs were defined, and some bugs were solved (along with tests). I'm still
 looking into ways to clean up the code, and if anyone has an idea for a cool
 feature, then they should drop me a line (or provide a patch).
 </p>
@@ -232,13 +232,13 @@ feature, then they should drop me a line (or provide a patch).
 <p>
 Some CPAN modules I inherited used the old
 <a href="http://search.cpan.org/perldoc?Test">Test.pm</a> for some of their
-<tt>t/*.t</tt> scripts instead of the more modern 
+<tt>t/*.t</tt> scripts instead of the more modern
 <a href="http://en.wikipedia.org/wiki/Test::More">Test::More</a>. This
 annoys me to no end because Test.pm is very limited. When I worked on
 <a href="http://beta.metacpan.org/release/Config-IniFiles">Config-IniFiles</a>,
-I did the conversion manually, which was a lot of work. More recently, I 
-<a href="http://blogs.perl.org/users/shlomi_fish/2011/06/resuming-maintenance-of-xml-libxml.html">started 
-working on XML-LibXML</a> which has over 40 of those pesky Test.pm scripts, and 
+I did the conversion manually, which was a lot of work. More recently, I
+<a href="http://blogs.perl.org/users/shlomi_fish/2011/06/resuming-maintenance-of-xml-libxml.html">started
+working on XML-LibXML</a> which has over 40 of those pesky Test.pm scripts, and
 I did not have the nerve to do all the manual and menial work.
 </p>
 
@@ -246,12 +246,12 @@ I did not have the nerve to do all the manual and menial work.
 As a result, I ended up spending a few hours studying
 <a href="http://beta.metacpan.org/release/PPI">PPI</a> (the Perl Parsing
 Interface), and writing
-<a href="http://www.shlomifish.org/open-source/projects/Test.pm-Converter/">a 
-script</a> to automatically convert Test.pm-based scripts to Test::More. The 
+<a href="http://www.shlomifish.org/open-source/projects/Test.pm-Converter/">a
+script</a> to automatically convert Test.pm-based scripts to Test::More. The
 main issue at hand was that in Test.pm, a single argument <tt>ok()</tt>
-tests for the scalar's truth, while a double argument <tt>ok()</tt> tests for 
-simple equivalence (similarly to Test::More's <tt>is()</tt>). Eventually, I got 
-the script working, with some limitations (see <a 
+tests for the scalar's truth, while a double argument <tt>ok()</tt> tests for
+simple equivalence (similarly to Test::More's <tt>is()</tt>). Eventually, I got
+the script working, with some limitations (see <a
 href="http://www.shlomifish.org/open-source/projects/Test.pm-Converter/">the page</a>).
 </p>
 
@@ -260,15 +260,15 @@ So what was my impression of PPI? It naturally seems more robust than using
 regular expressions and hacks to process Perl code, but there were a few quirks.
 For example, a PPI
 <a href="http://beta.metacpan.org/module/PPI::Structure::List">list</a> contains
-an array of its contents, and the commas are part of them, as are the 
-various other tokens in the sub-expressions. Therefore, divining the count of 
-the  arguments is pretty hard. I would have expected to get a more <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract 
+an array of its contents, and the commas are part of them, as are the
+various other tokens in the sub-expressions. Therefore, divining the count of
+the  arguments is pretty hard. I would have expected to get a more <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract
 syntax tree</a> of the arguments, and since I didn't I had to work around
 it with an ugly kludge.
 </p>
 
 <p>
-Furthermore, after stringifying the document object, the contents of the 
+Furthermore, after stringifying the document object, the contents of the
 <a href="http://en.wikipedia.org/wiki/Here_document">here-documents</a> were
 not included in the output from some reason. However, I may have done something
 wrong. I also wish the PPI PODs contained more meaningful examples.
@@ -298,31 +298,31 @@ this entry and another one in mind and I hope they can compensate for it.
 
 <p>
 For my work on <a href="http://fc-solve.shlomifish.org/">Freecell Solver</a>,
-I’ve written some code for encoding and decoding game positions into a 
-compact format, by encoding them as a delta from the position of origin. I 
+I’ve written some code for encoding and decoding game positions into a
+compact format, by encoding them as a delta from the position of origin. I
 first wrote it in Perl, in order to prototype it, and later
 translated it to C (which is the language that Freecell Solver is written in).
-I have written some rudimentary unit tests for it, but also wanted to test the 
+I have written some rudimentary unit tests for it, but also wanted to test the
 code against a large number of positions, by runnign it over the solutions of
-many Freecell deals. 
+many Freecell deals.
 </p>
 
 <p>
-The encoding rearranges the order of the card columns and the freecells, so 
+The encoding rearranges the order of the card columns and the freecells, so
 testing that the output test is correct requires calculating that arrangement.
 This was also done by the Perl code. I decided to write a small wrapper for
-an encoding+decoding round-trip in C, and use it from a Perl program I was 
-writing. So far so good. 
+an encoding+decoding round-trip in C, and use it from a Perl program I was
+writing. So far so good.
 </p>
 
 <p>
-I first looked at <a href="https://gitorious.org/perl-ctypes">the 
+I first looked at <a href="https://gitorious.org/perl-ctypes">the
 Perl version of Ctypes</a>, but it failed a large number of its assertions
-on my system, so I could not really trust it. Then I looked at 
+on my system, so I could not really trust it. Then I looked at
 <a href="http://search.cpan.org/perldoc?Inline::C">Inline::C</a>. I could
 not understand from its main page, how to return an <tt>SV *</tt> containing
 a string from it, but this was covered in the extensive
-<a href="http://search.cpan.org/perldoc?Inline::C-Cookbook">Inline::C 
+<a href="http://search.cpan.org/perldoc?Inline::C-Cookbook">Inline::C
 cookbook</a> and I wrote this Inline::C function:
 </p>
 
@@ -354,10 +354,10 @@ perl: symbol lookup error: /home/shlomif/progs/freecell/trunk/fc-solve/source/_I
 
 <p>
 I was familiar with errors like that, but it took me over an hour of playing
-with the various Inline::C configuration options, and trying to figure out 
+with the various Inline::C configuration options, and trying to figure out
 why it didn’t link against the relevant Freecell Solver library to realise
 what the problem was. It was that the library in question did not export the
-symbol, and gcc realised it didn't give the XS extension anything and omitted 
+symbol, and gcc realised it didn't give the XS extension anything and omitted
 it.
 </p>
 
@@ -429,16 +429,16 @@ else
 </pre>
 
 <p>
-The answer is “it depends.”. On my Linux system it prints 
+The answer is “it depends.”. On my Linux system it prints
 “Got &lt;hello world&gt;”, while on Windows, using Strawberry Perl, it
 prints “Got &lt;hello&gt;” and later on that the other args are “world”.
 </p>
 
 <p>
-I would expect the Linux behaviour were every argument passed to the list 
+I would expect the Linux behaviour were every argument passed to the list
 <a href="http://perldoc.perl.org/functions/exec.html">exec</a> arrives as
 one argument to <tt>@ARGV</tt> regardless of whitespace as the correct. It
-also the behaviour exhibited on both operating systems using 
+also the behaviour exhibited on both operating systems using
 <a href="http://perldoc.perl.org/functions/system.html">system</a>. Is this
 a bug?
 </p>
@@ -478,7 +478,7 @@ a meeting.
 
 <p>
 Before the meeting, I had helped publicise it on various online news channels,
-and thankfully quite a few people (about 20-30) came. I had a previous 
+and thankfully quite a few people (about 20-30) came. I had a previous
 appointment that day at 12:00, and so returned home where I ate, worked on
 the computer, and rested before the TelAviv.pm meeting.
 </p>
@@ -486,31 +486,31 @@ the computer, and rested before the TelAviv.pm meeting.
 <p>
 After I rode the bus, I arrived there a few minutes earlier. I met a fellow
 Perl monger on the way. We found the room with some difficulty, as there were
-very few signs outside the doors of the various rooms in the building. Several 
-people 
+very few signs outside the doors of the various rooms in the building. Several
+people
 including  <a href="http://szabgab.com/">Gabor</a> were already sitting
 in the room.
 They were discussing the upcoming Israeli Perl Workshop in February. In any
-case, I decided to walk to the nearby 
+case, I decided to walk to the nearby
 grocery store to buy some refreshments for the meeting, and when I returned
 there were more people in the room.
 </p>
 
 <p>
 Quite a few people arrived relatively late, but the talks started mostly on
-schedule. The first talk (by Erez Schatz) was short, and it discussed some 
+schedule. The first talk (by Erez Schatz) was short, and it discussed some
 recent tools that
 facilitate the Perl programmer’s life: <a href="http://search.cpan.org/dist/local-lib/">local-lib</a>, <a href="http://www.perlbrew.pl/">perlbrew</a>, cpanm
 and pm-uninstall. The talk was very fun, and he ended up covering some other
 tools in brief in the last slide. I’m still not convinced that I should use
-CPAN-Minus instead of my CPANPLUS (especially given 
-<a href="http://search.cpan.org/dist/CPANPLUS-Dist-Mageia/">CPANPLUS-Dist-Mageia</a> 
-and friends), but I still like perlbrew and local::lib and pm-uninstall seems 
+CPAN-Minus instead of my CPANPLUS (especially given
+<a href="http://search.cpan.org/dist/CPANPLUS-Dist-Mageia/">CPANPLUS-Dist-Mageia</a>
+and friends), but I still like perlbrew and local::lib and pm-uninstall seems
 useful.
 </p>
 
 <p>
-Erez mentioned that on Perl forums there were several very common and hated 
+Erez mentioned that on Perl forums there were several very common and hated
 questions like “How do I uninstall a perl module?” or “How can I use
 CPAN without root?” and that these technologies address these needs precisely.
 </p>
@@ -518,8 +518,8 @@ CPAN without root?” and that these technologies address these needs precisely.
 <p>
 After this talk, Erez gave a longer talk about DBIx-Class, which is an
 Object-Relational Mapper (ORM) for Perl. For the demo, he used a company
-whose employees are dogs, and the slides featured many pictures of dogs in 
-suits (some of them pretty scary). There were a few glitches in the 
+whose employees are dogs, and the slides featured many pictures of dogs in
+suits (some of them pretty scary). There were a few glitches in the
 demonstration, but they
 were promptly overcome, and the <tt>DBIC_TRACE=1</tt> flag was a big help.
 One bug in the code was that instead of updating the employee's department
@@ -536,7 +536,7 @@ which I had concluded was the case as well.
 
 <p>
 After that talk, there was a break, where people got to eat more of the
-cookies I bought and to chat. Afterwards, Ido Kanner presented about 
+cookies I bought and to chat. Afterwards, Ido Kanner presented about
 <a href="http://www.firebirdsql.org/">Firebird SQL</a>. It was a good talk,
 and Ido drew some comparisons between Firebird and SQLite, MySQL and
 PostgreSQL. Firebird looks interesting and it also has embedded (like
@@ -550,7 +550,7 @@ resolved in upcoming meetings.
 </p>
 
 <p>
-After the meeting, some of us (about 10) went to Spaghettim (a pasta/etc. 
+After the meeting, some of us (about 10) went to Spaghettim (a pasta/etc.
 place) and had dinner. We chatted about Atheism, Cable company tech-support,
 GNOME 3 and KDE 4, and lots of other stuff. This time I had a pizza, which
 although not too bad, made me realise I will be ordering pasta there from now
@@ -583,7 +583,7 @@ action items:
 <ol>
 <li>
 <p>
-If you have not acted against 
+If you have not acted against
 <a href="https://www.eff.org/deeplinks/2011/12/fight-blacklist-toolkit-anti-sopa-activists">SOPA
 - the proposed online blacklist/censorship bill</a>, you should. Follow the
 link for information on how to act against it.
@@ -602,7 +602,7 @@ take place this Wednesday, on 28 December, 2011. More information in the link.
 <p>
 <a href="http://golf.shinh.org/">Anarchy Golf</a> is a new server for Code Golf,
 which are online programming competitions for implementing code as shortly as
-possible. It supports Perl 5, Perl 6 and many other languages. There is 
+possible. It supports Perl 5, Perl 6 and many other languages. There is
 <a href="http://golf.shinh.org/p.rb?Starburst">an active challenge</a>, where
 the only Perl 5 submission so far is mine, so I could use some competition.
 </p>
@@ -637,7 +637,7 @@ breakpoint functionality.
 
 <p>
 The other two patches passed all of their own tests and the existing ones, but
-that wasn't the end of the story. A short time afterwards 
+that wasn't the end of the story. A short time afterwards
 <a href="https://rt.perl.org/rt3/Public/Bug/Display.html?id=104820">a
 regression was reported in the debugger</a>, which was caused by one of the
 patches that I introduced. While, I fixed it with a test, it was soon followed
@@ -646,12 +646,12 @@ of the perl debugger, which is incredibly incomplete.
 </p>
 
 <p>
-Another E-mail that caused an active discussion was 
+Another E-mail that caused an active discussion was
 <a href="http://www.nntp.perl.org/group/perl.perl5.porters/2011/11/msg179847.html">my
 proposal to add strict and warnings to lib/perl5db.pl</a>, in which someone
 kept arguing against it, and eventually said he confused it (it being the
 defualt command-line debugger front-end) with the debugger's guts, and ended
-up also supporting adding "use strict;". 
+up also supporting adding "use strict;".
 </p>
 
 <p>
@@ -664,7 +664,7 @@ is released.
 
 <p>
 The morals of this story is that the perl debugger needs more tests, and
-that trying to enhance it can easily break it. I started 
+that trying to enhance it can easily break it. I started
 <a href="https://github.com/shlomif/perl/tree/perl-d-add-tests-3">a branch
 on GitHub</a> where I've been committing more tests to the perl debugger
 to enhance its coverage.
@@ -693,12 +693,12 @@ Happy Holidays, and a Happy New Year.
 
 <p>
 Well, I've got a lot of stuff I’d like to blog about in the various blogs of
-mine, and so I’m starting with this report on the 
+mine, and so I’m starting with this report on the
 <a href="http://act.perl.org.il/ilpw2012/">Israeli Perl Workshop of 2012</a>,
-which had taken place in 28 February, 2012. Moreover, April Fools' Day is 
+which had taken place in 28 February, 2012. Moreover, April Fools' Day is
 approaching, and I had an idea for a Perl-related April Fools' gag, but after
 telling it to RJBS (the current Perl pumpking), he and I agreed that it would
-hit too many nerves. (PerlJam on IRC said he liked it, though). Maybe I’ll 
+hit too many nerves. (PerlJam on IRC said he liked it, though). Maybe I’ll
 publish it on 2 April with a big disclaimer on top, just for kicks.
 </p>
 
@@ -708,7 +708,7 @@ mailing list for review, but did not get any reviews, so it may not be too
 letter-perfect, but I guess that’s life.
 </p>
 
-<p>This is my report about the 
+<p>This is my report about the
 <a href="http://act.perl.org.il/ilpw2012/">Israeli Perl Workshop of 2012</a> . It was
 a fun and educational event, and I'm glad I was able to attend it. For better
 or for worse, all the talks I attended were in Room 1, but I was still able
@@ -727,12 +727,12 @@ like to thank <a href="http://www.booking.com/">Booking.com</a> for sponsoring t
 Perl Workshop 2012 (as well as having a presence there and giving some swag
 and chocolates), and they are looking for software developers with Perl
 experience to relocate to Amsterdam, so please consider working for them.</p>
-<p>In the yard, I met a few people including 
+<p>In the yard, I met a few people including
 <a href="http://search.cpan.org/~flora/">Florian Ragwitz</a> (a.k.a &quot;FLORA&quot; on CPAN or
 &quot;rafl&quot; on IRC - he has many cool modules there, including quite a few XS ones),
 who was one of the workshop’s visitors from Germany. Despite being German, his
-English accent sounded English to us. Later on we discussed accents in English 
-and he noted that the accents of some Israelis he met sounded like French to 
+English accent sounded English to us. Later on we discussed accents in English
+and he noted that the accents of some Israelis he met sounded like French to
 him (while ours seemed less so). This is strange, because Israelis can
 distinguish between a French accent in English and an Israeli Hebrew accent in
 English. </p>
@@ -745,9 +745,9 @@ room #1 (while sometimes visiting Room #2) to hear the ends of talks. I still
 would be happy to hear many of the talks that took place in Room #2 in the
 normal Tel Aviv Perl Mongers meetings, or alternatively, those talks in room #1
 which lacked enough time to be conveyed satisfactorily.</p>
-<p>The first talk in the day was 
-<a href="http://search.cpan.org/~eilara/">Ran Eilam</a>’s talk about &quot;Syntactic Sugar 
-causes Cancer of the Semicolon”, which had to be trimmed towards the end, 
+<p>The first talk in the day was
+<a href="http://search.cpan.org/~eilara/">Ran Eilam</a>’s talk about &quot;Syntactic Sugar
+causes Cancer of the Semicolon”, which had to be trimmed towards the end,
 because
 the introduction may have taken too long. The talk was interesting starting
 from an example of <code>ptr-&gt;val</code> being sugar in the C programming language
@@ -763,8 +763,8 @@ visitor from Germany, about
 <a href="http://act.perl.org.il/ilpw2012/talk/3955">Template::Flute</a> which is a
 designer’s friendly template system. In this template, one uses an HTML file
 with standard HTML attributes for designating the fields that needs to be
-replaced, and then an XML specification file that specifies how to process 
-the HTML (and in addition one uses Perl to give it data). As a result the 
+replaced, and then an XML specification file that specifies how to process
+the HTML (and in addition one uses Perl to give it data). As a result the
 designers can manipulate the HTML with their own tools, while still
 allowing the programmers to populate it with data.</p>
 <p>This seems like an interesting and potentially useful tool, but it’s
@@ -774,21 +774,21 @@ HTML file and the XML specification, but I didn't find a way to avoid it
 given the constraints that the HTML will be valid HTML 4/XHTML 1.</p>
 <p>The next talk about Time Management in Software Projects was cancelled because
 the presenter did not come (due to lack of time management as we joked then).
-I was able to catch a glimpse of the end of 
+I was able to catch a glimpse of the end of
 <a href="http://corky.net/dotan/">Dotan Dimet</a>’s “Perl and JavaScript:
 bioinformatics in a browser window” talk, but I don’t remember a lot of
 it except for a small amount of demonstration.</p>
-<p>The talk about Zero to CPAN was eventually given by 
+<p>The talk about Zero to CPAN was eventually given by
 <a href="http://blogs.perl.org/users/sawyer_x/">Sawyer</a> instead of by
-<a href="http://blogs.perl.org/users/erez_schatz/">Erez Schatz</a>. It was a nice one, and I’ve learned about 
+<a href="http://blogs.perl.org/users/erez_schatz/">Erez Schatz</a>. It was a nice one, and I’ve learned about
 <a href="http://metacpan.org/release/CPAN-Changes">the CPAN-Changes module</a> there
 (after Florian mentioned it, though). Sawyer covered the way to get to a
 working CPAN-like distribution from scratch using tools such as
 module-starter and explained what every file in the CPAN module hierarchy
 does, and demonstrated some test-driven-development. I knew most of it already,
 but it was still a fun talk.</p>
-<p><a href="http://www.linkedin.com/in/amirfr">Amir Friedman</a>‘s talk about software 
-configuration management (SCM) came next, 
+<p><a href="http://www.linkedin.com/in/amirfr">Amir Friedman</a>‘s talk about software
+configuration management (SCM) came next,
 and he discussed some open-source solutions for the various parts of SCM,
 which include version control, release management, task management, and
 project management. He recommended Gitflow (which we had a talk about
@@ -808,7 +808,7 @@ we should expect most things to be translated. It was compared to the
 Dutchmen tended to have very good English, and one of the other people
 commented that it was true, but that they still tended to prefer using
 software with Dutch localisation.</p>
-<p>I’ve also talked with Sawyer about his upcoming 
+<p>I’ve also talked with Sawyer about his upcoming
 <a href="http://act.perl.org.il/ilpw2012/talk/3936">“CGI.pm MUST DIE!” talk</a>. He
 said that he needs to become mentally energised for that talk because he
 feels strongly about it and wants to convey the energy. He passed an
@@ -824,20 +824,20 @@ of “CGI.pm - the only web development framework you’ll ever need” which wa
 less emotional but still interesting. I was not convinced that CGI.pm’s
 HTML generation routines were a good way to do output HTML (I never really
 liked them), so I may have been more convinced by Sawyer.</p>
-<p><a href="http://www.ynonperek.com/">Ynon Perek</a>’s 
+<p><a href="http://www.ynonperek.com/">Ynon Perek</a>’s
 <a href="http://act.perl.org.il/ilpw2012/talk/3977">talk</a> about
 “Implementing Perl (Moose) Design Patterns” came next, which was interesting,
 but again lacked adequate time to cover everything, and I hope will be given
 with less time constraints. One anecdote from there was that Ynon said there
-where three primary ways for polymorphism in Perl: Inheritance (“is-a”), 
+where three primary ways for polymorphism in Perl: Inheritance (“is-a”),
 Roles/Traits (“does-a”) and Containment/Delegation (“has-a”) and that
 he could no longer recommend inheritance (but did not get to explain why not
 from what I recall).</p>
 <p>In any case, I was surprised at Ynon’s implementation of the Factory
 pattern, and don’t remember the implementation given by him.</p>
-<p>Next came Tamir Lousky’s 
-<a href="http://act.perl.org.il/ilpw2012/talk/3953">talk</a> about generating vector 
-graphics with Perl and SVG. Its slides contained a lot of very nice eye candy. 
+<p>Next came Tamir Lousky’s
+<a href="http://act.perl.org.il/ilpw2012/talk/3953">talk</a> about generating vector
+graphics with Perl and SVG. Its slides contained a lot of very nice eye candy.
 The introduction
 to SVG and generating it was quite rudimentary, and did not cover the full
 potential of SVG. The demonstration and explanation of the module for
@@ -851,7 +851,7 @@ difference between the various SQL databases, but he did not encounter a
 situation where it would have made too much difference.</p>
 <p>The last feature of the evening were the lightning talks. I recall a talk
 by Florian Ragwitz about Google Code-In and Google Summer-of-Code. I also
-recall <a href="http://szabgab.com/">Gabor</a>’s talk about surviving in an uncooperative 
+recall <a href="http://szabgab.com/">Gabor</a>’s talk about surviving in an uncooperative
 workplace. He said
 that if the workplace does not practise best practices such as using version
 control systems or writing automated tests, one can create their own
@@ -860,14 +860,14 @@ convince the rest of the organisation that it’s beneficial.</p>
 <p>After the lightning talks, some people went to a local restaurant for dinner,
 but I decided against it because I was too tired from waking up early. As a
 result, I found someone who drove up north to drive me home, and got home.</p>
-<p>In the schedule I noticed that one could go to a certain URL at 
+<p>In the schedule I noticed that one could go to a certain URL at
 <a href="http://www.oreilly.com/">O’Reilly</a> and
 receive a free E-book of their choice. I used this opportunity to get the book
 <a href="http://shop.oreilly.com/product/9780596510046.do">Beautiful Code</a> , which
 I have started reading.</p>
 <p>The day was exhausting but very fun, and I enjoyed all the talks I attended.
-I’d like to thank the organisers of the event and most notably 
-<a href="http://szabgab.com/">Gabor Szabo</a> and Sawyer X, 
+I’d like to thank the organisers of the event and most notably
+<a href="http://szabgab.com/">Gabor Szabo</a> and Sawyer X,
 <a href="http://www.shenkar.ac.il/">Shenkar college</a> for providing the venue,
 <a href="http://www.booking.com/">Booking.com</a> for the sponsorship, O’Reilly for
 the free book presents, the foreign guests who came to present and to attend,
@@ -914,8 +914,8 @@ as perl5-porters) will adopt a schedule of a quarterly major release.
 <p>
 “Since version 6 of Perl has been claimed by a malevolent project that
 amounted to very little, we will release Perl version 7 next Summer, followed
-by Perl 8 in next Fall, and Perl 9 next Winter.” said the designated Perl 
-pumpking.The Perl foundation commented that it is sure that users will 
+by Perl 8 in next Fall, and Perl 9 next Winter.” said the designated Perl
+pumpking.The Perl foundation commented that it is sure that users will
 appreciate the accelerated release schedule, despite the fact that a lot
 of backwards’ compatibility will be broken in each release to further
 the language’s improvement.
@@ -934,15 +934,15 @@ simply force people to upgrade.”
 <p>
 The Perl porters are hard at work on perl-7.0.0, which will implement the
 upcoming Perl 7 specification with many new and exciting features and
-incompatibilities. 
+incompatibilities.
 </p>
 
 </blockquote>
 
 <p>
-Well, like I said, after discussing this idea with 
+Well, like I said, after discussing this idea with
 <a href="http://rjbs.manxome.org/">RJBS</a> (the current Perl 5 Pumpking),
-he and I agreed that it would be too cruel, given that many people 
+he and I agreed that it would be too cruel, given that many people
 are sensitive about upgrading their versions of Perl 5. Comparisons of how
 old the perl that your workplace/client/etc. has deployed on their systems
 is a common source of discussion among perl mongers (and someone told me
