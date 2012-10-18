@@ -1049,5 +1049,282 @@ We hope you find these additions useful or enlightening.
 
 </div>
 
+<div class="entry" id="App_Notifier_cpan_distributions">
+
+<ul class="info">
+<li><b>Date:</b> 22-07-2012</li>
+<li class="tags">perl, cpan, dancer</li>
+</ul>
+
+<h1>Announcement: the App-Notifier CPAN Distributions</h1>
+
+<p>
+I would like to announce two new CPAN distributions of mine:
+<a href="https://metacpan.org/release/App-Notifier-Service">App-Notifier-Service</a>
+and
+<a href="https://metacpan.org/release/App-Notifier-Client">App-Notifier-Client</a>.
+These are derived from a few simplistic scripts I've written in shell and
+Perl, to allow me to notify when a task has finished (e.g:
+<tt>make ; finish-client</tt>) or a certain time has elapsed (e.g:
+<tt>sleep 240 ; finish-client</tt>), and I decided to create something
+more serious as CPAN modules.
+</p>
+
+<p>
+App-Notifier-Service implements an HTTP service (using Dancer), which
+listens for requests, and once one arrives, implements a callback, which
+notifies the user on the localhost that the event occured. App-Notifier-Client
+complements it by implementing a client that connects to the service
+and sends the event.
+</p>
+
+<p>
+Currently documentation may be lacking, and there are almost no automated
+tests in the distributions, but it appears to work nicely. To get started,
+read the documentation and you may wish to peruse some of these files
+from my home directory. First of all, the <tt>.app_notifier.yml</tt> file:
+</p>
+
+<pre>
+commands:
+    default:
+        - /home/shlomif/bin/desktop-finish-cue
+    cookie:
+        - /home/shlomif/bin/desktop-finish-cue
+        - "--song"
+        - "/home/music/Music/dosd-mp3s/Cookie.mp3"
+client:
+    targets:
+        default:
+            url: "http://localhost:6300/"
+        lap:
+            url: "http://lap.shlomifish.org:6300/"
+
+</pre>
+
+<p>
+The <tt>desktop-finish-cue</tt> file:
+</p>
+
+<pre>
+#!/bin/bash
+
+song="/home/music/Music/dosd-mp3s/Theme - Eurovision.mp2"
+
+param="$1"
+shift
+if test "$param" = "--song"; then
+    arg="$1"
+    shift
+    song="$arg"
+fi
+
+xmessage "Your task has been finished! Go check it out." &amp;
+mplayer "$song"
+</pre>
+
+<p>
+And the <tt>finish-server</tt> script:
+</p>
+
+<pre>
+#!/bin/bash
+cd "$HOME"/progs/perl/alert/http-based/hg/App-Notifier-Service &amp;&amp;
+    perl ./bin/app.pl --port=6300
+</pre>
+
+<hr />
+
+<p>
+Otherwise, if you're in the Tel Aviv or vicinity, you are invited to
+<a href="http://mail.perl.org.il/pipermail/perl/2012-July/012671.html">the
+next Tel Aviv Perl Mongers meeting on Wednesday, 25 July 2012</a>. Otherwise,
+I wish to note that I have written my first Java golf program as part
+of <a href="http://golf.shinh.org/p.rb?Alphabet+texture+">Anarchy golf’s
+“Alphabet Texture” challenge</a> (Anarchy golf accepts challenges in many
+languages). At 167 bytes, it is over 3 times longer than the shortest Perl
+entry which is only 50 bytes (my Perl solution is 52 bytes). But it
+was fun to write. For your information,
+<a href="http://en.wikipedia.org/wiki/Code_golf">code golf</a> is a challenge
+in which, participating programmers are challenged to write the shortest
+program that achieves a certain objective. I find it fun and addictive.
+</p>
+
+</div>
+
+<div class="entry" id="tech_tip_packaging_cpan_distributions_in_mageia">
+
+<ul class="info">
+<li><b>Date:</b> 16-08-2012</li>
+<li class="tags">perl, cpan, tip, tech, tech tip, mageia, linux</li>
+</ul>
+
+<h1>Tech Tip: How to Package and Maintain CPAN Distributions in Mageia</h1>
+
+<p>
+<a href="http://www.mageia.org/">Mageia Linux</a> is an RPM-based
+Linux distribution, whose repositories contain
+<a href="http://jquelin.blogspot.co.il/2012/07/more-than-3000-perl-packages-in-mageia.html">over
+3,000 CPAN packages</a>, and part of the reason why it has so many is
+because Jerome Quelin and the other maintainers have worked on tools to
+facilitate creating Mageia packages for CPAN distributions and maintaining
+them.
+</p>
+
+<p>
+However, I was a little confused about using
+<a href="https://metacpan.org/release/App-Magpie">magpie</a>, so I'd like
+to share my findings here:
+</p>
+
+<ol>
+
+<li>
+<p>
+In order to import, upload and submit a new CPAN package into Mageia,
+along with all of its dependencies, one should not use magpie, but rather
+<a href="https://metacpan.org/release/App-CPAN2Pkg">cpan2pkg</a>. Its use
+is very simple: make <tt>rpm</tt> and <tt>urpmi</tt> sudoable, and type
+<tt>cpan2pkg Package::Name</tt> from the command-line inside an X terminal.
+This will start a Tk window where one can monitor the progress of preparing
+new RPM packages and it has an entry box to create more packages (which
+saves time on re-initialising CPAN.pm or CPANPLUS.pm).
+</p>
+</li>
+
+<li>
+<p>
+In order to upgrade a package, one can type
+<tt>eval $( magpie co -s perl-[PACKAGE_NAME] )</tt> and then
+<tt>magpie update</tt>. magpie requires <a href="https://metacpan.org/release/CPAN-Mini">minicpan</a> to be installed and updated.
+</p>
+</li>
+
+<li>
+<p>
+In order to install packages, one can do
+<tt>sudo urpmi 'perl(Package::Name)'</tt>. My
+<a href="https://metacpan.org/release/Module-Format">Module-Format module</a>
+facilitates the translation from other notations for writing modules:
+</p>
+
+<pre>
+up()
+{
+    sudo urpmi --auto $(perlmf as_rpm_colon "$@")
+}
+</pre>
+</li>
+</ol>
+
+</div>
+
+<div class="entry" id="tpf_debugger_grant_and_new_cpan_distributions">
+
+<ul class="info">
+<li><b>Date:</b> 01-09-2012</li>
+<li class="tags">perl, foundation, tpf, grant, debugger, cpan, ruby</li>
+</ul>
+
+<h1>Grant for Improving the Perl Debugger + New CPAN Distributions</h1>
+
+<p>
+First of all, I am glad to announce that the Perl Foundation grant
+committee has accepted my
+<a href="http://news.perlfoundation.org/2012/08/2012q3-grant-proposal-adding-t.html">grant
+proposal for adding tests and refactoring the built-in perl debugger</a>.
+Here is <a href="http://news.perlfoundation.org/2012/08/2012q3-grant-proposals---resul.html">the announcement</a> for which grant proposals were
+accepted. My grant manager for this grant is
+<a href="http://alanhaggai.org/">Alan Haggai Alavi</a>, whom I've been
+talking with online and have collaborated on a few projects, so I'm really
+happy to work with him again.
+</p>
+
+<p>
+I have already made some progress with the grant (and this post is part
+of it), and sent a log for Alan Haggai to post as a grant update.
+</p>
+
+<p>
+That put aside, I'd now like to publicise some of the new distributions
+I have uploaded to CPAN, as I had some ideas for new ones, and am also
+contemplating making enough uploads to have 100 CPAN distributions or more:
+</p>
+
+<ol>
+
+<li>
+<p>
+<a href="https://metacpan.org/release/WWW-LinkChecker-Internal">WWW-LinkChecker-Internal</a>
+is a distribution wrapping a script that checks for internal broken links. I
+released the first three versions of it in a day, and it uses WWW::Mechanize.
+The reason why I wrote it was that the WDG HTML validator reported some broken
+links in one of my sites, but not their origins, so I had to trace them in
+a different way, and ended up writing that.
+</p>
+</li>
+
+<li>
+<p>
+<a href="https://metacpan.org/release/Inline-Ruby">Inline-Ruby</a> is
+an Inline:: distribution I adopted that allows to embed Ruby code inside
+Perl programs. I applied some fixes for it (some of which were not released
+to CPAN yet and some are ugly workarounds), and am planning to maintain it
+further down the road.
+</p>
+</li>
+
+<li>
+<p>
+<a href="https://metacpan.org/release/Test-TrailingSpace">Test-TrailingSpace</a>
+is a <tt>Test::</tt> namespace distribution for verifying that your code
+does not contain trailing space. Death to trailing space!
+</p>
+</li>
+
+</ol>
+
+<p>
+A final anecdote is that when working on one of my CPAN modules I found the
+<tt>b [filename]:[line_num]</tt> feature that I implemented in the perl
+debugger to be of great help, and can be content that I'm eating my own
+dogfood.
+</p>
+
+<p>
+Cheers for now.
+</p>
+
+</div>
+
+<div class="entry" id="tech_tip_overriding_eumm_compiler">
+
+<ul class="info">
+<li><b>Date:</b> 09-09-2012</li>
+<li class="tags">tech, tip, tech tip, perl, eumm, compiler, gcc, clang</li>
+</ul>
+
+<h1>Tech Tip: Overriding the C compiler with ExtUtils::MakeMaker</h1>
+
+<p>
+In order to override the C compiler with ExtUtils::MakeMaker, one can
+do something like:
+</p>
+
+<pre>
+perl Makefile.PL CC=/usr/bin/clang
+</pre>
+
+<p>
+Which will make the "CC" variable in the generated makefile be set to
+<tt>/usr/bin/clang</tt> instead of the default. Apparently, setting the
+<tt>CC</tt> environment variable does not work like it does with CMake.
+</p>
+
+<p>
+Thanks to <a href="http://www.mail-archive.com/makemaker@perl.org/msg03060.html">Sisyphus for the tip</a>.
+</p>
+</div>
+
 </body>
 </html>
