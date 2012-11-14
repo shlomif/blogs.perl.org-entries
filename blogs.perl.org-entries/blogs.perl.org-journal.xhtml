@@ -1355,5 +1355,88 @@ open-source event), make sure you put it on
 
 </div>
 
+<div class="entry" id="three_command_line_utilities">
+
+<ul class="info">
+<li><b>Date:</b> 14-11-2012</li>
+<li class="tags">cpan, perl, command, line, cli, bash, gnu, parallel, sleep</li>
+</ul>
+
+<h1>Three Command-Line Utilities</h1>
+
+<p>
+So, November is
+<a href="http://en.wikipedia.org/wiki/National_Novel_Writing_Month">NaNoWriMo</a> (“National Novel Writing Month”), and I was hoping to get some serious
+writing done (instead of coding), but I kept being distracted with coding
+and random writing in various Internet forums. Well, hopefully this blog
+post will compensate a little for that.
+</p>
+
+<p>
+In this post, I’d like to cover three command-line utilities - two of them
+new and were written by me, and one of them somewhat older, but also written
+in Perl.
+</p>
+
+<p>
+The first utility is
+<a href="http://en.wikipedia.org/wiki/GNU_parallel">GNU Parallel</a>, which
+allows one to run several command-line jobs in parallel, using forking and/or
+ssh remote logins. I used it to speed up some processing I've been doing on
+my computer. For more information and some examples of usage, see
+<a href="http://zgp.org/pipermail/linux-elitists/2012-November/013428.html">my
+post about it to the linux-elitists mailing list</a>, and also read
+<a href="http://zgp.org/pipermail/linux-elitists/2012-November/013429.html">Thomas
+Sattler’s response</a> which provides some further insights.
+</p>
+
+<p>
+The second utility is
+<a href="http://www.shlomifish.org/open-source/projects/countdown/">countdown</a>, which is
+similar to the UNIX command-line sleep command, but displays the remaining
+time on the console. I wrote a prototype for it in Perl 6, only to discover it
+consumed far too many resources. The second prototype, as a Perl 5 program
+consumed close to zero resources of my computer. Yesterday, I converted it to
+a modulino (a Perl application implemented as a module) and uploaded
+several versions to the CPAN.
+</p>
+
+<p>
+The third utility is something I have placed in my
+<tt>~/.bashrc</tt> file in order to implement reminders when the shell
+starts. The code for it is:
+</p>
+
+<pre>
+reminder_file="$HOME/.local/share/shlomif/reminder/reminder.txt"
+if [ -s "$reminder_file" ] ; then
+    perl -Mstrict -Mwarnings -MTerm::ANSIColor -E 'my $x = colored("===", "bold red"); say "$x Reminders $x"'
+    cat "$reminder_file"
+fi
+
+Cancel_reminder()
+{
+    rm "$reminder_file"
+}
+</pre>
+
+<p>
+I wrote it because I wasn't prompted in time by Thunderbird+Lightning
+due to a strange bug, and because I had to ditch KOrganizer because it
+consumed too many resources here. This displays the Reminders whenever you
+start a new shell, which happens quite often with me, so it's OK. I use
+cron jobs to append stuff into "$reminder_file", and the Perl code displays
+a header in colour.
+</p>
+
+<p>
+That’s it for today.
+<a href="https://metacpan.org/release/App-Countdown">App-Countdown</a> is one
+step closer for the count-up (pun intended) towards the coveted 100
+distributions under “SHLOMIF” on CPAN, so that's another plus.
+</p>
+
+</div>
+
 </body>
 </html>
