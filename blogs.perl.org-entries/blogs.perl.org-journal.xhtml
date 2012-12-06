@@ -1438,5 +1438,128 @@ distributions under “SHLOMIF” on CPAN, so that's another plus.
 
 </div>
 
+<div class="entry" id="countup100_dec2012">
+
+<ul class="info">
+<li><b>Date:</b> 06-12-2012</li>
+<li class="tags">cpan, perl, sdlx, xml</li>
+</ul>
+
+<h1>Count-up to 100 CPAN Distributions: Test-XML-Ordered, and SDLx-Betweener and more</h1>
+
+<p>
+Well, it's no longer a secret that I’m craving to join the “100 CPAN
+Distributions Club” by releasing some code that is hopefully not too useless.
+Here I would like to blog about the two new additions to
+<a href="http://metacpan.org/author/SHLOMIF">my CPAN page</a> which are
+the 83rd and 84th distributions respectively. The story is a bit more
+complicated than that.
+</p>
+
+<p>
+The first upload is
+<a href="https://metacpan.org/release/SDLx-Betweener">SDLx-Betweener</a>,
+which allows for creating high-performance and smooth animations in SDL
+by making use of Perl/XS. Almost all of the coding (and a related
+YAPC::Israel talk) was done by
+<a href="http://metacpan.org/author/EILARA">Ran Eilam</a>, who is a very
+cool guy, a good friend and a former boss of mine, and I've just done
+(with his permission) some last-minute cleanups and did the initial upload
+to CPAN. So I kinda feel like the frog that sat on top of the elephant
+who crossed the river and said “We did it!”.
+</p>
+
+<p>
+However, I needed SDLx::Betweener
+for something I've been intending to work on, and wanted it on CPAN
+and packaged in Mageia Linux, so I did that. If you run into any problems
+with it, drop me a note or file a bug report, and hopefully I can resolve
+these problems (possibly with some help from Ran).
+</p>
+
+<p>
+The next distribution is original but the story there is more complicated.
+It all started when I decided to resume work on Qantor, which aims
+to eventually be a modern and saner alternative to TeX/LaTeX and Troff
+(although it is still extremely far from that now). I noticed that the parsing
+was still done by Regexp::Grammars, and so decided to convert it into
+<a href="https://metacpan.org/module/Parser::MGC">Parser::MGC</a>.
+Parser::MGC worked eventually and I was impressed from the straightforward
+way to do stuff with it, but it was time consuming to get there (like most
+other parser generators I tried, only a bit better), and involved writing
+some Moose 'around' code to debug the method calls, and also sometimes delving
+into the code. Parser::MGC is still not perfect (and some of the code I read
+there had gems like
+<tt>die $e if $committed or
+not eval { $e-&gt;isa( "Parser::MGC::Failure" ) };</tt> which I found hard
+to parse, and made me want to drown a kitten), but I think it sucks less
+and is more transparent than other parser generators I tried.
+</p>
+
+<p>
+Anyway, after I got it working, I noticed that the Test::XML::Ordered code
+(then still unreleased), generated a some memory problems and I suspected
+either XML::LibXML or libxml2 to be the culprit. This involved a long
+investigation process with valgrind, gdb, <tt>perl -d</tt> and other tools
+which culminated in a very small change and more lines of test code. This
+was released in XML::LibXML. After that I received a report that the tests
+got stuck, but that turned out to be due to external loading of DTDs and
+was easily fixed. There's another
+<a href="https://rt.cpan.org/Ticket/Display.html?id=81739">report</a> for
+a problem with perl-5.8.8 (ouch!) on Red Hat Enterprise Linux (ouch again!),
+but I'm not too motivated to do a lot about it (see
+<a href="http://www.shlomifish.org/humour/fortunes/show.cgi?id=hamakor-discs-mozilla-1.1-1">this fortune cookie</a>).
+</p>
+
+<p>
+Well, after I fixed the problem with XML::LibXML, I decided to release
+Test::XML::Ordered. I'm well aware of
+<a href="https://metacpan.org/module/Test::XML">Test::XML</a> but found
+it hard to rely on because it uses
+<a href="https://metacpan.org/module/XML::SemanticDiff">XML::SemanticDiff</a>
+(the latter I adopted) and which attempts to rearrange the order of the
+nodes when it sees fit (so
+<tt>&lt;ul&gt;&lt;li&gt;One&lt;/li&gt;&lt;li&gt;Two&lt;/li&gt;&lt;/ul&gt;</tt>
+and
+<tt>&lt;ul&gt;&lt;li&gt;Two&lt;/li&gt;&lt;li&gt;One&lt;/li&gt;&lt;/ul&gt;</tt>
+may be considered the same), which was not what I want and not what other
+people who contacted me about XML::SemanticDiff wanted.
+</p>
+
+<p>
+After Test::XML::Ordered, I decided it would be a good idea to finally
+work on the release of <tt>XML::GrammarBase</tt> which aims to provide
+“base classes and roles” for facilitating creating XML validators
+and processors. Work on it was pretty straightforward after I had
+Test::XML::Ordered available, but required some refactoring the classes
+from using <tt>Any::Moose</tt> to using <tt>Moo</tt> per advice of the
+people on <tt>#moose</tt>, and I have yet to convert the XSLT role into
+a parameterised role.
+</p>
+
+<p>
+I have some other code I'd like to release on CPAN after all that.
+</p>
+<hr />
+
+<p>
+Another related hacktivity was a set of patches to the core Vim that I've
+written to improve support for DocBook 5. Since I wanted to maintain
+compatibility with DocBook 4 documents (because DocBook 4 is still popular),
+this involved writing a Perl, Bash and Python Amalgam to generate the
+Vim code in question with a list of common, DocBook 4-only and DocBook 5-only
+tags. You an find it in
+<a href="http://bitbucket.org/shlomif/vim-docbook-5-support">its BitBucket
+repository</a> and is very hacky, but it works. Using the Python code
+gave me an idea for a missing XML::LibXML feature - DTD introspection - which
+I'd like to implement in the future.
+</p>
+
+<p>
+Well, that's all for now - just wanted to get it out of my system. Cheers!
+</p>
+
+<!-- TODO : Python+bash+perl amalgam to generate Vimscript code. -->
+</div>
 </body>
 </html>
