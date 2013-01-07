@@ -1574,7 +1574,7 @@ holidays, and Cheers!
 
 <p>
 Going over the previous count-ups to 100 CPAN distributions in this
-blog, I feel I have been a little carried away, in trying to release a lot
+blog, I feel I have been carried away: I tried to release a lot
 of new distributions to the CPAN, while neglecting all the existing
 distributions I have, and not tending to their pending problems and their
 lack of <b>software quality</b> in several aspects (See
@@ -1583,15 +1583,16 @@ older essay I have written about it</a>).
 </p>
 
 <p>
-I was reminded of it after when
+I was reminded of it when
 working on a few new or existing distributions using
 <a href="http://dzil.org/">Dist-Zilla</a>, I ran into a few places where some
 of its plugins or features were underdocumented, and non-exemplified (in
 the SYNOPSIS sections or wherever), which consumed many hours of my time, some
 times made me need to read or grep the code, and made me frustrated. I sent
 the maintainers some pull requests for
-better documenting this - and some of them were applied - but still I would
-prefer them to be properly documented and exemplified.
+better documenting this - and some of them were applied - but still, it would
+have been preferable, for them to be properly documented and exemplified
+in the first place.
 </p>
 
 <p>
@@ -1603,9 +1604,13 @@ super classes as well as the classes themselves for
 support for DTD introspection and the oft requested
 <a href="http://code.activestate.com/lists/perl-xml/8953/">DOM elements
 annotations</a> for it; more
-<a href="http://cpants.cpanauthors.org/kwalitee.html">kwalitee</a>; etc. I’m
+<a href="http://cpants.cpanauthors.org/kwalitee.html">kwalitee</a>; etc. and
+naturally also better publicity and advertising
+(<a href="http://freecode.com/">Freecode.com</a> (formerly known
+as Freshmeat.net), Reddit, blogs.perl.org, video screencasts, etc.) because
+people should see how cool your code is. I’m
 not sure if any of these things would be as blog worthy as new
-CPAN distributions, but it will CPAN a bit better.
+CPAN distributions, but it will make CPAN a bit better.
 </p>
 
 <p>
@@ -1675,6 +1680,15 @@ or <code>XML::GrammarBase::App</code> that will allow for easy registry
 of such formats from the command line and for processing them.
 </p>
 
+<p>
+At first, I believed that Moo was “almost-completely-unlike-Moose”, but
+«use MooX 'late';» makes it much more Moose-like and I enjoy it, and it is
+now recommended over Any::Moose or maybe even plain Mouse. Mouse is very
+fast as well and has a far smaller startup time than Moose, but it does not
+interoperate very well with pure-Moose classes, which Moo does
+well.
+</p>
+
 <h2>HTML-Widgets-NavMenu-ToJSON</h2>
 
 <p>
@@ -1698,13 +1712,57 @@ astronautics</a>, but I ended up with something concrete at the end so it's
 under control.
 </p>
 
+<p>
+Here is the synopsis:
+</p>
+
+<pre>
+use HTML::Widgets::NavMenu::ToJSON;
+use HTML::Widgets::NavMenu::ToJSON::Data_Persistence::YAML;
+
+my $persistence =
+    HTML::Widgets::NavMenu::ToJSON::Data_Persistence::YAML-&gt;new(
+        {
+            filename =&gt; &#39;/path/to/persistence_data.yaml&#39;,
+        }
+    );
+
+my $obj = HTML::Widgets::NavMenu::ToJSON-&gt;new(
+    {
+        data_persistence_store =&gt; $persistence,
+        # The one given as input to HTML::Widgets::NavMenu
+        tree_contents =&gt; $tree_contents,
+    }
+);
+
+use IO::All;
+
+io-&gt;file(&#39;output.json&#39;)-&gt;println(
+    $obj-&gt;output_as_json(
+        {
+            %args
+        }
+    )
+);
+</pre>
+
+<p>
+It could be made a bit simpler using an abstraction, but I feel it's not
+too bad. You can write custom
+<a href="http://metacpan.org/module/HTML::Widgets::NavMenu::ToJSON::Data_Persistence">HTML::Widgets::NavMenu::ToJSON::Data_Persistence</a>
+child classes by implementing the <code>load()</code>
+and <code>save()</code> methods - I did not document the process yet,
+but you can base your efforts on
+<a href="http://metacpan.org/module/HTML::Widgets::NavMenu::ToJSON::Data_Persistence::YAML">HTML::Widgets::NavMenu::ToJSON::Data_Persistence::YAML</a>.
+</p>
+
 <h2>Dist-Zilla-Plugin-TestRun</h2>
 
 <p>
 Since I'm used to running <kbd>./Build runtest</kbd> instead of
 <kbd>./Build test</kbd> for my distributions, I sought a way of doing the
 same using Dist-Zilla. It turned out there wasn't an easy way, and
-<a href="https://metacpan.org/release/Dist-Zilla-Plugin-TestRun">Dist-Zilla-Plugin-TestRun</a>
+<a href="http://metacpan.org/release/Dist-Zilla-Plugin-TestRun">Dist-Zilla-Plugin-TestRun</a>
 is the best I could do. I hope to write a patch to make the <kbd>test</kbd>
 command more configurable.
 </p>
@@ -1764,6 +1822,65 @@ to tie up some loose ends, but expect XML-Grammar-Vered at a CPAN mirror
 near you Real Soon Now™.
 </p>
 
+<p>
+Vered-XML supports a subset of XHTML, as well as some specialised tags such
+as <code>&lt;pdoc /&gt;</code> (perldoc),
+<code>&lt;pdoc_f /&gt;</code> (perldoc -f),
+<code>&lt;cpan_self_mod /&gt;</code> (CPAN self link to module), etc. and
+contains a RELAX NG schema and an xsltproc/libxslt2-compatible
+XSLT 1.0 stylesheet. Here is an excerpt from
+<a href="http://bitbucket.org/shlomif/perl-begin/src/d183a648b865a223c353b16664e05b6046bd478d/src/tutorials/bad-elements/perl-elements-to-avoid.xml-grammar-vered.xml?at=default">the “Perl Elements to Avoid” source XML</a>:
+</p>
+
+<pre>
+&lt;item xml:id=&quot;slurp&quot;&gt;
+&lt;info&gt;
+&lt;title&gt;Slurping a file (i.e: Reading it all into memory)&lt;/title&gt;
+&lt;/info&gt;
+&lt;p&gt;
+One can see several bad ways to read a file into memory in Perl. Among them
+are:
+&lt;/p&gt;
+&lt;code_blk syntax=&quot;perl&quot;&gt;
+# Not portable and suffers from possible
+# shell code injection.
+my $contents = `cat $filename`;
+# Wasteful of CPU and memory:
+my $contents = join(&quot;&quot;, &amp;lt;$fh&amp;gt;);
+# Even more so:
+my $contents = &#39;&#39;;
+while (my $line = &amp;lt;$fh&amp;gt;)
+{
+    $contents .= $line;
+}
+&lt;/code_blk&gt;
+&lt;p&gt;
+You should avoid them all. Instead the proper way to read an entire file
+into a long string is to either use CPAN distributions for that such as
+&lt;cpan_self_dist d=&quot;File-Slurp&quot; /&gt; or
+&lt;cpan_self_dist d=&quot;IO-All&quot; /&gt;, or alternatively
+write down the following function and use it:
+&lt;/p&gt;
+&lt;code_blk syntax=&quot;perl&quot;&gt;
+sub _slurp
+{
+    my $filename = shift;
+    open my $in, &#39;&amp;lt;&#39;, $filename
+        or die &quot;Cannot open &#39;$filename&#39; for slurping - $!&quot;;
+    local $/;
+    my $contents = &amp;lt;$in&amp;gt;;
+    close($in);
+    return $contents;
+}
+&lt;/code_blk&gt;
+&lt;/item&gt;
+</pre>
+
+<p>
+I'm not sure if Vered-XML will have much utility outside that use case, but
+I think that putting it on CPAN won't hurt much.
+</p>
+
 <h2>Improving perlresume.org</h2>
 
 <p>
@@ -1786,13 +1903,22 @@ tech blog</a>,
 on <a href="http://www.reddit.com/r/vim/comments/15o6v1/announcing_the_vim_beginners_site/">Reddit</a>,
 and on some mailing lists. While in the past I used my own
 <a href="http://web-cpan.shlomifish.org/latemp/">static site
-generator called “Latemp”</a> based on Website Meta Language for this,
-I used Jekyll this time, at least for the first prototype, in order to
-evaluate it for use in a different site (<a href="http://www.linux.org.il/">The
-Israeli Linux Portal</a>). While at first I was impressed with Jekyll,
+generator called “Latemp”</a> based on Website Meta Language for sites
+like that,
+I used Jekyll this time, at least for the first prototype. I did so
+in order to evaluate it for use in a different site
+(<a href="http://www.linux.org.il/">The
+Israeli Linux Portal</a> which is currently implemented using an awkward
+custom PHP-based system, that mostly just reads stuff out of XML data
+files and outputs a constant static HTML as XSLT.). While at first I was
+impressed with Jekyll,
 I then realised that it was quite opaque, often required many plugins to
-get going and that one plugin I looked at lacked examples and was otherwise
-under documented. There is <a href="http://iwantmyname.com/blog/2011/02/list-static-website-generators.html">a
+get some basic functionality and that one plugin I looked at lacked examples
+and was otherwise under documented.
+</p>
+
+<p>
+There is <a href="http://iwantmyname.com/blog/2011/02/list-static-website-generators.html">a
 list of many more static site generators / offline content-management
 systems</a> around (which does not include my own Latemp), and it may be
 easier to roll up something on my own based on Template Toolkit or its ttree.
@@ -1815,7 +1941,7 @@ large part due to what appear to be an Emscripten bug) but it's working.
 
 <p>
 The <a href="https://github.com/kripken/emscripten/wiki">Emscripten
-wiki</a> contains links to many much more impressive demos including
+wiki</a> contains links to many, much more impressive, demos including
 <a href="http://kripken.github.com/meandmyshadow.web/mams.html">a
 JavaScript version of the open-source graphical game “Me and My Shadow”</a>.
 </p>
@@ -1838,11 +1964,11 @@ starting to study in university, seriously, and also read the Camel book
 and other books and resources about Perl, asked me to look at my code
 to see how readable it is. I referred him to the
 <a href="https://metacpan.org/source/SHLOMIF/HTML-Widgets-NavMenu-1.0701/lib/HTML/Widgets/NavMenu.pm">source
-code</a> of HTML::Widgets::NavMenu, which will being early code of
-mine, was written in a modular manner, and he said he found it to be
-well-factored and yet very readable . He noted that he suspected that
-Perl would have been less believed to “hard to understand” or “unreadable”
-if it had standardised on using my preferred style -
+code</a> of HTML::Widgets::NavMenu, which will being an early code of
+mine (and still not fully modernised), was written in a modular manner, and he
+said he found it to be well-factored and yet very readable . He noted that he
+suspected that Perl would be less believed to “hard to understand” or
+“unreadable”, if it sandardised on using my preferred style -
 <a href="http://en.wikipedia.org/wiki/Indent_style#Allman_style">Allman
 style</a> - instead of its default style with the opening braces on the
 same line as the opening clause (e.g: <tt>if ( COND ) {</tt>).
@@ -1850,15 +1976,17 @@ same line as the opening clause (e.g: <tt>if ( COND ) {</tt>).
 
 <p>
 The other anecdote was that someone else there, who is working in Visual
-Basic and Visual Basic for Applications for a living (for lack of an
-alternative in his homeland), told us that he found the CPAN documentation
-to usually be superior than the MSDN (Microsoft Developers Network) one.
+Basic and Visual Basic for Applications for a living (for lack of good
+alternative for software development job prospects in his homeland), told us
+that he found the CPAN documentation to usually be superior than the MSDN
+(Microsoft Developers Network) one.
 I found it a little strange, because I recall finding the MSDN documentation
 to give detailed examples for almost every subroutine and a page of prose and
-explanation for each one. Then I showed him the “SYNOPSIS” sections of
-some of the .pm files in CPAN and he was impressed and said it was useful
-(because you can copy+paste it and tweak it), but naturally commented that
-not all .pm files had those.
+explanation for each one, and reportedly large parts of it were also
+translated into some non-English languages by Microsoft. Then I showed him
+the “SYNOPSIS” sections of some of the .pm files in CPAN and he was
+even more impressed and said it was useful (because you can copy+paste it and
+tweak it), but naturally commented that not all .pm files had those.
 </p>
 
 <h2>Conclusion</h2>
@@ -1870,10 +1998,17 @@ pipe. One of them will require quite a lot of cleanup work to do, but it's
 not a high priority. I also have to juggle some other endeavours, and also
 recently started contracting for an Internet friend as a Drupal developer
 (and in the future possibly one for Moodle as well), which may consume even
-more of my time (but on the bright side pay a little). It’s no secret that
-I am not a big fan of PHP, but Drupal seems impressive so far, and
+more of my time (but on the bright side pay a little money). It’s no secret
+that I am not a big fan of PHP, but Drupal seems impressive so far, and
 hides away a lot of PHP’s ugliness. It took me some time to get acquainted
-with it, so I hope now things will be smoother and easier to do.
+with it, so I hope now things will be smoother and easier to do. It seems that
+there's quite a bit of demand for converting sites into Drupal, setting up new
+sites, or maintaining them in Israel (and possibly elsewhere as well) so it
+is probably a useful skill to have under my belt.
+</p>
+
+<p>
+Hope you enjoyed this hacktivity log, and see you next time. Byeeeee!
 </p>
 
 </div>
