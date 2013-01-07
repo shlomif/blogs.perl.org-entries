@@ -1562,5 +1562,265 @@ holidays, and Cheers!
 
 <!-- TODO : Python+bash+perl amalgam to generate Vimscript code. -->
 </div>
+
+<div class="entry" id="countup100_jan2013">
+
+<ul class="info">
+<li><b>Date:</b> 07-01-2013</li>
+<li class="tags">cpan, perl, sdlx, xml, 100, hacktivity, hacktivity log</li>
+</ul>
+
+<h1>Count-up to 100 CPAN Distributions: Quality *as well as* Quantity</h1>
+
+<p>
+Going over the previous count-ups to 100 CPAN distributions in this
+blog, I feel I have been a little carried away, in trying to release a lot
+of new distributions to the CPAN, while neglecting all the existing
+distributions I have, and not tending to their pending problems and their
+lack of <b>software quality</b> in several aspects (See
+<a href="http://www.shlomifish.org/philosophy/computers/high-quality-software/rev2/">an
+older essay I have written about it</a>).
+</p>
+
+<p>
+I was reminded of it after when
+working on a few new or existing distributions using
+<a href="http://dzil.org/">Dist-Zilla</a>, I ran into a few places where some
+of its plugins or features were underdocumented, and non-exemplified (in
+the SYNOPSIS sections or wherever), which consumed many hours of my time, some
+times made me need to read or grep the code, and made me frustrated. I sent
+the maintainers some pull requests for
+better documenting this - and some of them were applied - but still I would
+prefer them to be properly documented and exemplified.
+</p>
+
+<p>
+While I believe most of my CPAN distributions are in better condition, there
+are some aspects that are lacking, and I would like to fix them: more examples
+outside the SYNOPSES, and better SYNOPSES; documenting all methods of the
+super classes as well as the classes themselves for
+<a href="http://metacpan.org/release/XML-LibXML">XML-LibXML</a>; adding
+support for DTD introspection and the oft requested
+<a href="http://code.activestate.com/lists/perl-xml/8953/">DOM elements
+annotations</a> for it; more
+<a href="http://cpants.cpanauthors.org/kwalitee.html">kwalitee</a>; etc. I’m
+not sure if any of these things would be as blog worthy as new
+CPAN distributions, but it will CPAN a bit better.
+</p>
+
+<p>
+(Now that I think of it, perhaps a CPAN janitors initiative, which will
+submit pull requests and patches for existing distributions to improve
+their quality will be a good idea.)
+</p>
+
+<p>
+Anyway, I am going to split this report into sections:
+</p>
+
+<h2>XML-GrammarBase</h2>
+
+<p>
+After some work (and misunderstanding of some of the Moo / MooX
+documentation, which resulted in some pull requests), I released
+<a href="http://www.shlomifish.org/open-source/projects/XML-Grammar/Base/">XML-GrammarBase</a>
+which aims provides roles and base classes for easily writing wrappers around
+XML schema formats and XML translation languages. So far only RELAXNG and
+XSLT are supported. Here is the synopsis from the docs:
+</p>
+
+<pre>
+package XML::Grammar::MyGrammar::ToOtherStuff;
+
+use MooX 'late';
+
+use XML::GrammarBase::Role::RelaxNG;
+use XML::GrammarBase::Role::XSLT;
+
+with ('XML::GrammarBase::Role::RelaxNG');
+with XSLT(output_format =&gt; 'html');
+with XSLT(output_format =&gt; 'docbook');
+
+has '+module_base' =&gt; (default =&gt; 'XML-Grammar-MyGrammar');
+has '+rng_schema_basename' =&gt; (default =&gt; 'my-grammar.rng');
+
+has '+to_html_xslt_transform_basename' =&gt; (default =&gt; 'mygrammar-xml-to-html.xslt');
+has '+to_docbook_xslt_transform_basename' =&gt; (default =&gt; 'mygrammar-xml-to-docbook.xslt');
+
+package main;
+
+my $xslt = XML::Grammar::MyGrammar::ToOtherStuff-&gt;new(
+    data_dir =&gt; "/path/to/data-dir",
+);
+
+# Throws an exception on failure.
+my $as_html = $xslt-&gt;perform_xslt_translation(
+    {
+        output_format =&gt; 'html'
+        source =&gt; {file =&gt; $input_filename, },
+        output =&gt; "string",
+    }
+);
+</pre>
+
+<p>
+perform_xslt_translation supports a myriad of options and formats, and you
+get it all for free.
+</p>
+
+<p>
+I've also been contemplating something like
+<code>App::XML::GrammarBase</code>
+or <code>XML::GrammarBase::App</code> that will allow for easy registry
+of such formats from the command line and for processing them.
+</p>
+
+<h2>HTML-Widgets-NavMenu-ToJSON</h2>
+
+<p>
+As I was working on <a href="http://www.shlomifish.org/">my homepage</a>, I
+noticed that after I placed all the sub-navigation menus inside the main
+navigation menu, it increased the size of the navigation menu considerably,
+having it consume over 40,000 bytes. I decided to put only a subset of it
+as HTML, and load and populate the rest using an AJAX call to a common
+and static .json file. So I needed a way to convert the input of
+<a href="https://metacpan.org/release/HTML-Widgets-NavMenu">HTML-Widgets-NavMenu</a>
+</p>
+
+<p>
+So enter
+<a href="https://metacpan.org/module/HTML::Widgets::NavMenu::ToJSON">HTML::Widgets::NavMenu::ToJSON</a>,
+which serialises a navigation menu structure as JSON. I also implemented a
+persistence layer for it, currently with only one backend - a YAML file,
+so the IDs which jqTree require would be, well, persisted. This is a bit of
+an <a href="http://www.joelonsoftware.com/articles/fog0000000018.html">architecture
+astronautics</a>, but I ended up with something concrete at the end so it's
+under control.
+</p>
+
+<h2>Dist-Zilla-Plugin-TestRun</h2>
+
+<p>
+Since I'm used to running <kbd>./Build runtest</kbd> instead of
+<kbd>./Build test</kbd> for my distributions, I sought a way of doing the
+same using Dist-Zilla. It turned out there wasn't an easy way, and
+<a href="https://metacpan.org/release/Dist-Zilla-Plugin-TestRun">Dist-Zilla-Plugin-TestRun</a>
+is the best I could do. I hope to write a patch to make the <kbd>test</kbd>
+command more configurable.
+</p>
+
+<h2>Test-XML-Ordered</h2>
+
+<p>
+<a href="http://metacpan.org/module/Test::XML::Ordered">Test::XML::Ordered</a>
+makes a non-“semantic” diff of XML files and tells you if they are
+equivalent (up to differences of whitespace and namespace prefixes). It grew
+out of my frustration with
+<a href="http://metacpan.org/module/XML::SemanticDiff">XML::SemanticDiff</a>,
+upon which Test::XML is based, and which I maintain. A quick CPAN search
+revealed other modules for testing XML in a similar manner, but since I have
+already written my code, I decided to release it.
+</p>
+
+<p>
+One tip is that with the current API, one should use something like:
+</p>
+
+<pre>
+my @common = (validation =&gt; 0, load_ext_dtd =&gt; 0, no_network =&gt; 1);
+
+is_xml_ordered (
+    [ string =&gt; normalize_xml($results_buffer), @common, ],
+    [ location =&gt; "./t/data/xhtml-results/$fn_base.xhtml", @common, ],
+    "Testing for Good XSLTing of '$fn_base'",
+);
+</pre>
+
+<p>
+In order to test XHTML documents for equivalency.
+</p>
+
+<h2>Vered-XML</h2>
+
+<p>
+I thought that Vered-XML (currently only available in the
+<a href="http://bitbucket.org/shlomif/perl-begin">Perl Beginners’ Site’s
+repository</a> was probably the most ad-hoc and tailored to match
+XML grammar I have ever created, and was used to convert the markup of
+<a href="http://perl-begin.org/tutorials/bad-elements/">the “Perl Elements
+to Avoid” page</a> from hacky Website META Language markup to XML, so it
+will be easier to translate to different (human) languages and also somewhat
+easier to maintain and render. Currently it renders to DocBook/XML, which
+allows translation to many other formats.
+</p>
+
+<p>
+So why did I call it Vered? Since it was so ad-hoc, and I didn't know what
+else it would be useful for, I wanted to give it an artsy name, and considered
+using a random Hebrew feminine name. Then I thought that “a rose by any other
+name would smell as sweer”, and thought of calling it Rose, but translated
+to Hebrew it was “Vered”, which is also a Hebrew feminine name. I still have
+to tie up some loose ends, but expect XML-Grammar-Vered at a CPAN mirror
+near you Real Soon Now™.
+</p>
+
+<h2>Improving perlresume.org</h2>
+
+<p>
+I filed a few issues and sent some pull requests for
+<a href="http://perlresume.org/">perlresume.org</a> for some problems
+I ran into, and <a href="http://showmetheco.de/">vti</a> fixed or
+applied them promptly. Thanks!
+</p>
+
+<h2>Beginners’ Sites</h2>
+
+<p>
+I invested more work into <a href="http://perl-begin.org/">the Perl Beginners’
+site</a>
+and also, after some encouragement from the good people on
+<a href="irc://irc.freenode.net/#vim">#vim</a> began work on
+<a href="http://vim.begin-site.org/">the Vim Beginners’s site</a>, which
+I publicised on <a href="http://shlomif-tech.livejournal.com/65619.html">my
+tech blog</a>,
+on <a href="http://www.reddit.com/r/vim/comments/15o6v1/announcing_the_vim_beginners_site/">Reddit</a>,
+and on some mailing lists. While in the past I used my own
+<a href="http://web-cpan.shlomifish.org/latemp/">static site
+generator called “Latemp”</a> based on Website Meta Language for this,
+I used Jekyll this time, at least for the first prototype, in order to
+evaluate it for use in a different site (<a href="http://www.linux.org.il/">The
+Israeli Linux Portal</a>). While at first I was impressed with Jekyll,
+I then realised that it was quite opaque, often required many plugins to
+get going and that one plugin I looked at lacked examples and was otherwise
+under documented. There is <a href="http://iwantmyname.com/blog/2011/02/list-static-website-generators.html">a
+list of many more static site generators / offline content-management
+systems</a> around (which does not include my own Latemp), and it may be
+easier to roll up something on my own based on Template Toolkit or its ttree.
+All this just confirms my
+(and <a href="http://blogs.perl.org/users/su-shee/">Su-Shee</a>’s) suspicion
+that every self-respecting web programmer has written at least one.
+</p>
+
+<h2>Freecell Solver for JavaScript - ☺</h2>
+
+<p>
+I have been distracted for many hours trying to port Freecell Solver
+to JavaScript using the very cool
+<a href="https://github.com/kripken/emscripten">Emscripten</a> LLVM bitcode
+to JavaScript compiler.
+The <a href="http://fc-solve.shlomifish.org/js-fc-solve/text/">mostly
+final result</a> could still use some work, and is still under optimised (in
+large part due to what appear to be an Emscripten bug) but it's working.
+</p>
+
+<p>
+The <a href="https://github.com/kripken/emscripten/wiki">Emscripten
+wiki</a> contains links to many much more impressive demos including
+<a href="http://kripken.github.com/meandmyshadow.web/mams.html">a
+JavaScript version of the open-source graphical game “Me and My Shadow”</a>.
+</p>
+
+</div>
+
 </body>
 </html>
