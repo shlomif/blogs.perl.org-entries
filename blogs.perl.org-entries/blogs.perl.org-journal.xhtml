@@ -2012,5 +2012,163 @@ Hope you enjoyed this hacktivity log, and see you next time. Byeeeee!
 
 </div>
 
+<div class="entry" id="just_write_the_god_damn_test_motherfucker">
+
+<ul class="info">
+<li><b>Date:</b> 07-01-2013</li>
+<li class="tags">tdd, tests, philosophy, essay</li>
+</ul>
+
+<h1>Essay: “Just write the God-damn tests, motherfucker!”</h1>
+
+<p>
+(I originally wrote this in
+<a href="http://www.nntp.perl.org/group/perl.qa/2013/01/msg13350.html">a post to qa@perl.org</a>, and I apologise for the profanity in the title, but I felt
+it is needed in this case.)
+</p>
+
+<p>
+So why am I writing this? I used to feel guilty about not being conscious of
+the distinction between the various scopes of tests, like unit tests vs.
+integration tests vs. system tests vs. functional tests etc. when I wrote the
+tests. I just noticed that I need a test here (as a regression test for a bug,
+or to <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a> (=
+test-driven develop a new feature, or after implementing a new feature,
+etc.), and wrote it using Test::More or whatever. However, now I feel that
+trying to philosophise about the distinction between all those is not so
+useful for the people who are actually trying to write the tests.
+</p>
+
+<p>
+<q>Tests are good, mmkay? Just freaking write them!</q>
+</p>
+
+<p>
+chromatic has expressed <a href="http://modernperlbooks.com/mt/2012/04/what-testing-dsls-get-wrong.html">some sentiments</a> against the so-called “Behaviour
+Driven Development” (BDD) Domain-specific-languages (DSLs) such as cucumber.
+</p>
+
+<p>
+One thing that he notes in a comment there is:
+</p>
+
+<blockquote>
+
+<p>
+Our clients are the parents, guardians, and teachers of children between the
+ages of eight and twelve inclusive.
+</p>
+
+<p>
+The intent of Cucumber is to make readable testcases, just as the intent of
+COBOL and AppleScript and visual component programming is to enable
+non-programmers to create software without having to learn how to program.
+</p>
+
+</blockquote>
+
+<p>
+It is impossible to have people who are non-programmers write
+structure code without learning how to program, at least until we get
+sufficiently intelligent Sci-Fi-like artificial intelligence (not the current
+crop of artificial ultra-stupidities) that will be able to perform
+programming like humans do, and will be willing to do so, while not having
+free will and still be obedient to us, and that will perform adequately. I
+feel that you need to write <b>some</b> kind of code, however formatted, to
+write tests, just like HTML and CSS and spreadsheet programs, involve writing
+some kind of *code*.
+</p>
+
+<p>
+If you want to have your clients write tests, my best suggestion is to either
+instruct them in the proper methodology and discipline of coding, or
+alternatively have them show you how to reproduce the problem (using
+screenshots, screencasts, shared remote desktop sessions, etc.) and then
+<b>you</b> should write a test for it.
+
+<p>
+Some people fear that teaching laymen how to code will create
+competition for professional programmers, and dilute the profession. However,
+this is not true, because there's always a difference between a casual dealer
+in a craftsmanship or art, and someone who invested a substantial amount of
+time doing it. E.g: lots of people can cook well, but not everyone is a
+professional Chef, and Chefs still often teach other people cooking, or share
+their recipes, because that does not dilute their profession.
+</p>
+
+<p>
+So I think the distinction between the various tests may be useful for
+methodologists and software engineering researchers (people who try to guide
+other people how to code) more than the people who are actually coding. To quote
+Picasso: “When art critics get together they talk about Form and Structure and
+Meaning. When artists get together they talk about where you can buy cheap
+turpentine.”
+( taken from <a href="http://orip.org/">Ori Peleg’s blog</a> ).
+</p>
+
+<p>
+Similarly, literature critics and researchers have very little to say that is
+of use for most writers and even authors. I hated studying Literature (what
+Americans might call “English” although naturally in Israel, we study Hebrew
+texts) with a passion, and didn't do too well on the tests (in part because
+out of personal honesty, I refused to write a lot of extraneous text, which
+the teacher seemed to have preferred), only to become a writer of
+<a href="http://www.shlomifish.org/humour/">fiction</a> and
+<a href="http://www.shlomifish.org/philosophy/">essays</a> (see
+<a href="http://www.paulgraham.com/essay.html">Paul
+Graham’s “The Age of the Essay”</a> for why they are not only about
+literature) after graduation. Furthermore, most people I
+talked with seem to have liked and appreciate the textual works I have
+written (although I admit they are certainly not letter perfect), and I
+could usually find some value in the criticisms of people who did not, even
+if expressed very destructively, and often was able to improve my works
+accordingly.
+</p>
+
+<p>
+Similarly, I'm now struggling with <a href="http://www.amazon.com/xUnit-Test-Patterns-Refactoring-Code/dp/0131495054">this tome</a>
+which seems like I cannot see the forest for the trees from it, while I
+really enjoyed reading the much shorter and much more hands-on
+<a href="http://en.wikipedia.org/wiki/Test-Driven_Development_by_Example"><i>Test Driven Development by Example</i> (by Kent Back)</a>.
+</p>
+
+<p>
+The time we talk about how to write tests is often better spent writing tests
+(or production code, which is, naturally, what tests are aimed to support and
+are meaningless without it), so I think we should just “freaking write them”.
+</p>
+
+<p>
+<q>Just write the god-damn test, motherfucker!</q>
+</p>
+
+<p>
+(
+<b>Note:</b> the title of this essay was inspired by
+the <a href="http://programming-motherfucker.com/">“Programming,
+Motherfucker”</a> of Zed Shaw, which is very amusing, even if it seems
+to be written in a somewhat ironic tone, and that contains the useful
+<a href="http://programming-motherfucker.com/become.html">huge list of free
+books for learning programming</a>.
+)
+</p>
+
+<h3 id="license">Licence</h3>
+
+<p>
+As opposed to most of my previous essays, this work is Copyright by Shlomi
+Fish, 2013, under the
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative
+Commons Attribution-NonCommercial 3.0 Unported licence</a>, with a
+deliberate exemption for using the text on web pages with web commercials.
+For more information, see
+<a href="http://www.shlomifish.org/meta/copyrights/">my interpretation of
+the licence</a>.
+If you wish to use it under any different licence, then
+<a href="http://www.shlomifish.org/me/contact-me/">drop me a line</a>.
+</p>
+
+</div>
+
 </body>
 </html>
