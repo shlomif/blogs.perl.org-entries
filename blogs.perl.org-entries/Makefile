@@ -1,7 +1,10 @@
-all: t.xhtml
+SRC = blogs.perl.org-journal.xhtml
+OUT = _TEMP/t.xhtml
 
-t.xhtml: blogs.perl.org-journal.xhtml
+all: $(OUT)
+
+$(OUT): $(SRC)
 	cp -f $< $@
 
-upload: t.xhtml
-	rsync -a -v --progress --inplace *.xhtml "$${__HOMEPAGE_REMOTE_PATH}/blogs.perl-journal/"
+upload: $(OUT) $(SRC)
+	rsync -a -v --progress --inplace $(OUT) $(SRC) "$${__HOMEPAGE_REMOTE_PATH}/blogs.perl-journal/"
