@@ -2660,15 +2660,14 @@ on it.
 
 </div>
 
-<div class="entry" id="why_I_am_looking_for_any_job">
+<div class="entry" id="heroic_people_make_any_job_awesome">
 
 <ul class="info">
 <li><b>Date:</b> 13-04-2013</li>
 <li class="tags">jobs, work, employment, hacktivity log</li>
 </ul>
 
-<h1>Copied from Slashdot.org: “Heroic people make any job they
-take awesome.”</h1>
+<h1>Copied from Slashdot.org: “Heroic people make any job they take awesome.”</h1>
 
 <p>
 First of all, I have written my
@@ -2763,6 +2762,127 @@ or a sys admin, or anything else that they will find a job at. Don't think "I'm
 too good for that" because like they say in Hollywood "There are no small roles
 - only small (= small-minded) actors." You can be an awesome superheroic person
 even if you're just a factory worker.
+</p>
+
+</div>
+
+<div class="entry" id="hacktivity_02_06_2013">
+
+<ul class="info">
+<li><b>Date:</b> 07-01-2013</li>
+<li class="tags">cpan, perl, hacking, hacktivity, rsync, uploading</li>
+</ul>
+
+<h1>The “sky” command-line application and other Recent hacktivity</h1>
+
+<p>
+If you have a good web hosting, you may have run into a pattern, where you
+are uploading files to it for other people to download and need to find the
+URL where they were uploaded to. Thing is - recalling the exact
+<a href="http://en.wikipedia.org/wiki/Rsync">Rsync</a> (= a file
+uploader) command and then going to the web browser to access the URL
+is time-consuming, and repetitive.
+<a href="http://www.shlomifish.org/open-source/projects/sky/">sky</a>,
+written in Perl using Moo and available on CPAN, aims to fix all that.
+</p>
+
+<p>
+Here is a sample invocation from the web-site:
+</p>
+
+<pre>
+shlomif@telaviv1:~$ sky up /home/music/Music/mp3s/Thierry\ de\ Massia/Elements\ essentiels/01\ -\ Le\ vent.ogg
+X11 forwarding request failed on channel 0
+sending incremental file list
+01 - Le vent.ogg
+     5271287 100%  147.24kB/s    0:00:34 (xfer#1, to-check=0/1)
+
+sent 5272011 bytes  received 31 bytes  87141.19 bytes/sec
+total size is 5271287  speedup is 1.00
+Got URL:
+http://www.shlomifish.org/Files/files/music/mp3-ogg/01%20-%20Le%20vent.ogg
+shlomif@telaviv1:~$
+</pre>
+
+<p>
+As you can see, we just specified the file, and it divined the rsync
+command and gave us the resultant URL. Convenient.
+</p>
+
+<p>
+sky requires a configuration file in <code>~/.config/Perl/App-Sky/app_sky_conf.yml</code> such as this one:
+</p>
+
+<pre>
+---
+default_site: homepage
+sites:
+    homepage:
+        base_upload_cmd:
+            - 'rsync'
+            - '-a'
+            - '-v'
+            - '--progress'
+            - '--inplace'
+        dest_upload_prefix: 'hostgator:public_html/'
+        dest_upload_url_prefix: 'http://www.shlomifish.org/'
+        sections:
+            code:
+                basename_re: '\.(?:pl|pm|c|py)\z'
+                target_dir: 'Files/files/code/'
+            music:
+                basename_re: '\.(?:mp3|ogg|wav|aac|m4a)\z'
+                target_dir: 'Files/files/music/mp3-ogg/'
+            video:
+                basename_re: '\.(?:webm|flv|avi|mpeg|mpg|mp4|ogv)\z'
+                target_dir: 'Files/files/video/'
+</pre>
+
+<p>
+And it uses the <code>basename_re</code> to figure out where to upload it
+later. The next features I would like to see added are an ability to specify
+the target directory or alternatively override the target section, and naturally
+- better documentation. But I'm happy with what I have so far.
+</p>
+
+<h2>CPAN Cleanups</h2>
+
+<p>
+I have been going over many of <a href="https://metacpan.org/author/SHLOMIF">my
+CPAN distributions</a>
+and doing various cleanups such as removing trailing whitespace (with tests
+based on
+<a href="https://metacpan.org/release/Test-TrailingSpace">Test-TrailingSpace</a>),
+or converting the <code>Changes</code> file to be compliant with
+<a href="https://metacpan.org/release/CPAN-Changes">CPAN-Changes</a>. It was
+kinda fun, though time consuming.
+</p>
+
+<h2>New Version of Freecell Solver</h2>
+
+<p>
+There’s a
+<a href="http://fc-solve.blogspot.co.il/2013/05/freecell-solver-3180-was-released.html">new
+stable version of Freecell Solver</a>, 3.18.0 released with some improvements
+including a port to JavaScript.
+</p>
+
+<h2>Black Hole Solitaire Solver</h2>
+
+<p>
+I have done a lot of work on
+<a href="http://www.shlomifish.org/open-source/projects/black-hole-solitaire-solver/">Black
+Hole Solitaire Solver</a>, and it can now also solve All-in-a-Row-Solitaire,
+and has some other improvements.
+</p>
+
+<h2>Binary Puzzle Solver</h2>
+
+<p>
+The
+<a href="http://www.shlomifish.org/open-source/projects/japanese-puzzle-games/binary-puzzle/">Binary
+Puzzle Solver</a> (written in Ruby) is now at version 0.0.3, with some bug
+fixes, several new moves and a convenient command line application.
 </p>
 
 </div>
