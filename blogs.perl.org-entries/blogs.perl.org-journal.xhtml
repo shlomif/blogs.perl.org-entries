@@ -2887,5 +2887,86 @@ fixes, several new moves and a convenient command line application.
 
 </div>
 
+<div class="entry" id="some_perl_related_bugs-june-2013">
+
+<ul class="info">
+<li><b>Date:</b> 24-06-2013</li>
+<li class="tags">perl, Module-Build-Tiny, valgrind, windows, open, source</li>
+</ul>
+
+<h1>Some Perl-Related Bugs and How They Were Fixed.</h1>
+
+<p>
+In this entry, I’d like to tell about several Perl-related bugs I have run
+into, and how they were fixed. I know I have not been blogging a lot lately,
+but, on the bright side, I was busy coding.
+</p>
+
+<h2>XML-Grammar-Fortune-Synd Test Failures on Some Windows-based Testers</h2>
+
+<p>
+For a long time I've been getting test failures such as
+<a href="http://www.cpantesters.org/cpan/report/28051c7c-71ca-1014-9ba1-70af6b2677eb">this
+one</a> for my
+<a href="https://metacpan.org/release/XML-Grammar-Fortune-Synd">XML-Grammar-Fortune-Synd</a>
+module, from some Windows-based systems, which I was unable to reproduce on
+my local Linux system. Per
+<a href="http://www.nntp.perl.org/group/perl.cpan.testers.discuss/2013/05/msg3151.html">Michael G. Schwern’s advice</a>,
+I tried to convert all the path handling to use File::Spec for paths
+portability, but it did not fix the problem. Then I tried it on a Windows XP
+VM, but the tests passed there fine. Eventually, I had to install a Windows 7
+VM, and run the tests there and it failed. I originally suspected the problem
+was with <a href="https://metacpan.org/release/File-Temp">File::Temp</a>’s
+tempdir,
+but it turned out to be an inconsistency in the behaviour of
+<a href="https://metacpan.org/module/File::Copy">File::Copy</a> across
+the systems, where it copied a read only file to the temporary directory,
+as another read only file, which made <code>open()</code> throw
+an error when writing to it.
+</p>
+
+<p>
+This was fixed by these two subroutines:
+</p>
+
+<pre>
+sub _my_copy
+{
+    my ($src, $dest) = @_;
+
+    open my $out_fh, '&gt;', $dest;
+    print {$out_fh} _slurp($src);
+    close($out_fh);
+
+    return;
+}
+
+sub _slurp
+{
+    my $filename = shift;
+
+    open my $in, "&lt;", $filename
+        or die "Cannot open '$filename' for slurping - $!";
+
+    local $/;
+    my $contents = &lt;$in&gt;;
+
+    close($in);
+
+    return $contents;
+}
+</pre>
+
+<p>
+Where I used <code>_my_copy()</code> to copy from one file location to another.
+</p>
+
+<p>
+Since this was fixed, I didn't get any test failures for the module
+from Microsoft Windows machines or otherwise. Silence is golden.
+</p>
+
+</div>
+
 </body>
 </html>
