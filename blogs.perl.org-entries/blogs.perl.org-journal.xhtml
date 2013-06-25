@@ -2887,7 +2887,7 @@ fixes, several new moves and a convenient command line application.
 
 </div>
 
-<div class="entry" id="some_perl_related_bugs-june-2013">
+<div class="entry" id="some_perl_related_bugs__june_2013">
 
 <ul class="info">
 <li><b>Date:</b> 24-06-2013</li>
@@ -2905,7 +2905,7 @@ but, on the bright side, I was busy coding.
 <h2>XML-Grammar-Fortune-Synd Test Failures on Some Windows-based Testers</h2>
 
 <p>
-For a long time I've been getting test failures such as
+For a long time, I've been getting test failures such as
 <a href="http://www.cpantesters.org/cpan/report/28051c7c-71ca-1014-9ba1-70af6b2677eb">this
 one</a> for my
 <a href="https://metacpan.org/release/XML-Grammar-Fortune-Synd">XML-Grammar-Fortune-Synd</a>
@@ -2915,14 +2915,15 @@ my local Linux system. Per
 I tried to convert all the path handling to use File::Spec for paths
 portability, but it did not fix the problem. Then I tried it on a Windows XP
 VM, but the tests passed there fine. Eventually, I had to install a Windows 7
-VM, and run the tests there and it failed. I originally suspected the problem
-was with <a href="https://metacpan.org/release/File-Temp">File::Temp</a>’s
-tempdir,
+VM, and run the tests there, and they failed. I originally suspected the
+problem was with
+<a href="https://metacpan.org/release/File-Temp">File::Temp</a>’s
+<code>tempdir()</code> function,
 but it turned out to be an inconsistency in the behaviour of
 <a href="https://metacpan.org/module/File::Copy">File::Copy</a> across
-the systems, where it copied a read only file to the temporary directory,
-as another read only file, which made <code>open()</code> throw
-an error when writing to it.
+the systems. On some systems, it copied a read only file to the temporary
+directory, preserving its read-only status, which made
+<code>open()</code> throw an error when writing to it.
 </p>
 
 <p>
@@ -2974,7 +2975,7 @@ distributions started using)
 <a href="https://bugs.mageia.org/show_bug.cgi?id=10449">failed to run</a>
 on Mageia Linux, while they ran fine in a perl installed from perlbrew. The
 problem was that the file was partly writable while Module-Build-Tiny
-wante it to be completely read-only. At first, we suspected a combination of
+wanted it to be completely read-only. At first, we suspected a combination of
 the perl build-time flags caused it, but a perl I built from source with all
 the Mageia flags, passed all the tests. So it was likely caused by a Mageia
 patch.
@@ -2993,14 +2994,15 @@ We ended up removing the patch permanently from the Mageia perl package.
 <h2>Second Problem with Module-Build-Tiny: Double-Dash</h2>
 
 <p>
-Another problem I had with Module-Build-Tiny, after that was that
-<a href="https://rt.cpan.org/Public/Bug/Display.html?id=86240">it appeared
-to have ignored destdir and installdirs</a>, but it turned out that we
-needed to spell it <code>--destdir=$FOO</code> instead of
-<code>destdir=$FOO</code> and as <code>--installdirs=vendor</code> instead
+Another problem I had with Module-Build-Tiny, after the previous
+one was that <a href="https://rt.cpan.org/Public/Bug/Display.html?id=86240">it
+appeared to have ignored</a> the “destdir” and “installdirs” command line
+arguments , but it turned out that we
+needed to spell them <code>--destdir=$FOO</code> instead of
+<code>destdir=$FOO</code>, and as <code>--installdirs=vendor</code> instead
 of <code>installdirs=vendor</code> (with double-dash prefixes). This
 was noted in the <a href="https://wiki.mageia.org/en/Perl_policy">Mageia
-Perl Policy</a> and I also sent
+Perl Policy</a>, and I also sent
 <a href="https://github.com/jquelin/cpanplus-dist-mageia/pull/3"> a pull
 request</a> for fixing it to CPANPLUS-Dist-Mageia.
 </p>
@@ -3012,8 +3014,9 @@ As I did
 <a href="http://tech.groups.yahoo.com/group/fc-solve-discuss/message/1351">some
 work</a> on
 <a href="http://fc-solve.shlomifish.org/">Freecell Solver</a>, I was annoyed
-by the fact that the valgrind.t test script, which ran several tests for the
-programs for <a href="https://en.wikipedia.org/wiki/Valgrind">valgrind</a>
+by the fact that the valgrind.t test script, which ran several tests for
+checking the programs for
+<a href="https://en.wikipedia.org/wiki/Valgrind">valgrind</a>
 sanity, was too time consuming, despite the fact that I ran it first and ran
 the other test scripts in parallel to it using prove’s “-j” flag.
 </p>
