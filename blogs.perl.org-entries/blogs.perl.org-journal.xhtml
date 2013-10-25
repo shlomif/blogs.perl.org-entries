@@ -3046,5 +3046,71 @@ Thanks to Altreus for reviewing this entry.
 
 </div>
 
+<div class="entry" id="I_have_over_a_100_distributions_on_CPAN">
+
+<ul class="info">
+<li><b>Date:</b> 07-01-2013</li>
+<li class="tags">cpan, perl, hacking, hacktivity, download manager, 100</li>
+</ul>
+
+<h2>I now have over a 100 Distributions on CPAN!</h2>
+
+<p>
+Some days ago I discovered that my CPAN distributions count had already gone
+above 100, only that my <a href="https://metacpan.org/author/SHLOMIF">MetaCPAN
+page</a> has misled me due to
+<a href="https://github.com/CPAN-API/metacpan-web/issues/973">a bug</a> (
+which I reported since). I now have 103 distributions on CPAN and you can
+find <a href="http://perl.org.il/israeli-projects.html">a list
+of them</a> on the Israeli Perl Mongers site, with whatever is missing from
+the MetaCPAN page.
+</p>
+
+<p>
+So now I'm in the CPAN 100 club, and now will also better focus on improving
+the quality of my existing distributions. According to GumbyPAN, the
+top ten authors are
+<code>SHARYANTO [265] RJBS [258] TOBYINK [239] ADAMK [236] ZOFFIX [222]
+MIYAGAWA [216] BINGOS [197] INGY [177] TOKUHIROM [170] SMUELLER [156]</code>,
+so no one has gone up to 300 distributions yet (also see
+<a href="http://stats.cpantesters.org/leadercpan.html#top20current">the
+top 20 current in the leadercpan page.</a>).
+</p>
+
+<h2>Maniac Downloader</h2>
+
+<p>
+One of the distributions on my road to the 100 distributions was
+<a href="http://www.shlomifish.org/open-source/projects/maniac-downloader/">Maniac
+Downloader</a>, which is a download accelerator written in Perl using
+<a href="https://metacpan.org/release/AnyEvent">AnyEvent</a> and other
+CPAN distributions. It was written as a way for me to scratch an itch where
+I noticed that I could get better download throughput from many
+sites by opening more than one connection. I tried several download managers,
+but most of them were GUI only and the only terminal one I found -
+<a href="https://sourceforge.net/projects/prozilla/">prozilla</a>, could not
+handle <code>https://</code> URLs and, furthermore, didn’t implement the
+“secret sauce” of Maniac downloader of splitting slow segments into multiple
+parts to speed up the acceleration, and finally - was very noisy. Since
+prozilla is written in C, it was not easy to hack on it, so I decided to
+write something myself using Perl.
+</p>
+
+<p>
+I wrote the first prototype of Maniac Downloader using POE, but didn’t get
+very far, and I also think performance left some things to be desired. Then,
+some weeks ago, I started working on the second version as a Dist-Zilla
+distribution and using AnyEvent, and made more progress. AnyEvent is easy
+to use, and works nicely and quickly, and I like it more than POE.
+</p>
+
+<p>
+I released App-ManiacDownloader-v0.0.3 to the CPAN today, and it now resumes
+interrupted downloads, so it's getting more usable for me. There are still
+some tasks left to be done there, but you can try using it already.
+</p>
+
+</div>
+
 </body>
 </html>
