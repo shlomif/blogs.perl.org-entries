@@ -3112,5 +3112,84 @@ some tasks left to be done there, but you can try using it already.
 
 </div>
 
+<div class="entry" id="tech_tip_loop_labels_in_Perl_6">
+
+<ul class="info">
+<li><b>Date:</b> 13-01-2014</li>
+<li class="tags">perl, perl 6, tech, tip, tech tip, loops, labels</li>
+</ul>
+
+<h1>Tech Tip: Loop Labels in Perl 6</h1>
+
+<h2>The Tip</h2>
+
+<p>
+It is known that one can label loops (or arbitrary blocks) in Perl 5, using
+the syntax of <code>MYLABEL: while (COND()) { BLOCK }</code>
+or <code>MYLABEL: for my $x (@array) { BLOCK }</code> and then one can
+do <code>last MYLABEL;</code>, <code>next MYLABEL;</code>, or
+<code>redo MYLABEL;</code> (for more information see
+<a href="http://perldoc.perl.org/perlsyn.html">perldoc perlsyn</a>).
+However, I was unable to find how to do something
+like that in Perl 6, despite some amount of searching. Luckily, the people
+on the Perl 6 helped me.
+</p>
+
+<p>
+The answer is that in Perl 6, it’s essentially not different:
+</p>
+
+<pre>
+MYLABEL: for (1 .. 100) -&gt; $x
+{
+.
+.
+    last MYLABEL;
+.
+.
+}
+
+WHILE_LABEL: while $x &lt; 24
+{
+.
+.
+    next WHILE_LABEL;
+.
+.
+}
+</pre>
+
+<p>
+In Perl 6, one can also write <code>MYLABEL.last;</code> instead, but
+<code>last MYLABEL;</code> will still work. <b>Note</b> however that
+“last/redo/next” + label are not currently implemented in
+<a href="http://rakudo.org/">Rakudo Perl 6</a> (though you can still safely
+add labels to the loops).
+</p>
+
+<p>
+Cheers!
+</p>
+
+<h2>Meta</h2>
+
+<p>
+I haven’t blogged for a while in my blogs.perl.org blog, even though
+I’ve been meaning to. Anyway, I’m mostly fine, and been working on some
+Project Euler challenges, some pull requests and patches to projects, and
+some activity on my own projects. Hopefully, I'll find the time to write
+something more subtantial. Recently, I’ve contributed some extra examples to
+the Project Euler section of
+<a href="https://github.com/perl6/perl6-examples">the perl6-examples
+repository</a>. As a result, I was recently granted a perl6-GitHub-project-wide
+commit bit (by none other than
+<a href="https://en.wikipedia.org/wiki/Larry_Wall">TimToady</a>), so
+now I can do all the MAYHEM and DESTRUCTION I want there (Muahahahahahahah!).
+Just kidding about that: all I’m planning to do for now is add more Perl 6
+examples.
+</p>
+
+</div>
+
 </body>
 </html>
