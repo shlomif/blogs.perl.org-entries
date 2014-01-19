@@ -3191,5 +3191,111 @@ examples.
 
 </div>
 
+<div class="entry" id="tech_tip_open_fh_for_rw_wo_clobbering">
+
+<ul class="info">
+<li><b>Date:</b> 19-01-2014</li>
+<li class="tags">perl, perl 5, tech, tip, tech tip, open, files, I/O</li>
+</ul>
+
+<h1>Tech Tip: Opening a file for read/write without clobbering it.</h1>
+
+<h2>The Tip</h2>
+
+<p>
+<a href="http://perldoc.perl.org/perlopentut.html">perlopentut</a>
+gives <a href="http://perldoc.perl.org/perlopentut.html#Mixing-Reads-and-Writes">several
+options</a> for opening a file for read and write, and I opted to use
+<code>'+&gt;'</code> for
+<a href="http://www.shlomifish.org/open-source/projects/maniac-downloader/">Maniac
+Downloader</a>, but as it turned out, it caused the existing file to be
+clobbered (= its length to be set to zero and all of its contents deleted).
+</p>
+
+<p>
+After asking on Freenode’s #perl channel, we reached this solution for
+opening a filehandle so that: <b>1)</b> it will be opened for read/write.
+<b>2)</b> it can open both an existing file or create a new file that does
+not exist. <b>3)</b> If the file exists, its contents will be retained,
+and it won't be clobbered. and <b>4)</b> it will overwrite existing contents,
+and not append everything at the end of the file.
+</p>
+
+<p>
+The code is as follows:
+</p>
+
+<pre>
+sub _open_fh_for_read_write_without_clobbering
+{
+    my ($path, $url_basename) = @_;
+
+    # open with '+&gt;:raw' will clobber the file.
+    # On the other hand, open with '+&lt;:raw' won't create a new file if it
+    # does not exist.
+    # So we have to restort to this.
+    #
+    # For more information, see: http://perldoc.perl.org/perlopentut.html
+    {
+        open my $fh_temp, '+&gt;&gt;:raw', $path
+            or die "Cannot open '$path' for temp-creation. $!";
+        close($fh_temp);
+    }
+    open my $fh, "+&lt;:raw", $path
+        or die "${url_basename}: $!";
+
+    return $fh;
+}
+</pre>
+
+<p>
+( You can freely reuse this code under your choice of
+<a href="https://en.wikipedia.org/wiki/MIT_License">the MIT/X11 License</a>
+or <a href="https://creativecommons.org/choose/zero/">the
+Public Domain/CC0</a>. )
+</p>
+
+<p>
+The <code>$url_basename</code> is a relic of the roots of Maniac Downloader.
+Using that file-handle I used
+<a href="http://perldoc.perl.org/functions/sysseek.html">sysseek</a>
+and <a href="http://perldoc.perl.org/functions/syswrite.html">syswrite</a>,
+and it worked nicely.
+</p>
+
+<p>
+I should note that <a href="https://metacpan.org/author/MAUKE">mauke</a>
+suggested using this instead:
+</p>
+
+<pre>
+use File::Open qw(fsysopen);
+my $fh = fsysopen($path, 'rw');
+binmode $fh;
+</pre>
+
+<h2>More about Maniac Downloader</h2>
+
+<p>
+I investigated why Maniac Downloader misdownloaded several “.iso” files
+after being interrupted and resumed, and it turned out to have been caused
+by the fact that it clobbered the temporary buffer files, due to the
+reason I mentioned above. This was fixed in version 0.0.5.
+</p>
+
+<p>
+Next I tried to benchmark it against
+<a href="http://aria2.sourceforge.net/">aria2</a> and GNU wget in trying
+to download a file from a local mirror. Using ten connections for both aria2
+and Maniac Downloader, I saw that aria2 and wget took about 30 minutes
+to download the file, while Maniac Downloader downloaded it in less than 13
+minutes. However, at one point the ManDown downloading completely stopped
+(displaying 0 KB/s), and I had to Ctrl+C it and run it again. I guess
+now I’ll need to investigate how to cancel the HTTP/HTTPS downloads and
+start them again if they stalled.
+</p>
+
+</div>
+
 </body>
 </html>
