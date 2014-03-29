@@ -3297,5 +3297,131 @@ start them again if they stalled.
 
 </div>
 
+<div class="entry" id="recent_hacktivity_log_29_march_2014">
+
+<ul class="info">
+<li><b>Date:</b> 29-03-2014</li>
+<li class="tags">perl, philosophy, humor, hacktivity log, xml, films, fiction</li>
+</ul>
+
+<h1>Recent Hacktivity Log</h1>
+
+<p>
+This is another “recent hacktivity logs” of some of the open source
+work I’ve been up to lately.
+</p>
+
+<h2>Working on my CPANTS Kwalitee Score</h2>
+
+<p>
+I worked on my <a href="http://cpants.cpanauthors.org/">CPANTS</a>
+(= a CPAN Testing Service) Kwalitee score. My
+<a href="http://cpants.cpanauthors.org/author/SHLOMIF">CPANTS page</a>
+currently says I have an Average Kwalitee of 133.37, a CPANTS Game
+Kwalitee of 99.61 and a Rank of 97 in the league of “5 or more”.
+</p>
+
+<p>
+I was looking for something to do and decided to revamp my CPAN distributions’
+Kwalitee as much as I could. This involved quite a lot of actions:
+</p>
+
+<ol>
+<li>
+<p>
+Converting distributions from “Makefile.PL” to “Build.PL” or to Dist-Zilla.
+</p>
+</li>
+
+<li>
+<p>
+Adding various test scripts for POD coverage, POD validity, CPAN changes
+validty and trailing whitespace (the latter are not required by CPANTS
+but they are something I like to have for good measure).
+</p>
+</li>
+
+<li>
+<p>
+Resurrecting or tracing the version control history of various modules, either
+using
+<a href="https://metacpan.org/release/App-cpangitify">App-cpangitify</a>
+or using the old repositories over at bitbucket.org or the even older ones
+on my Subversion repository on <code>svn.berlios.de</code>.
+</p>
+</li>
+
+<li>
+<p>
+Adding "use strict;" and "use warnings;".
+</p>
+</li>
+
+<li>
+<p>
+Having a $VERSION in all the modules (“.pm” files).
+</p>
+</li>
+
+</ol>
+
+<p>
+Anyway, it was a good excuse to do a lot of clean ups, and doing all this work
+made me appreciate the utility of Dist-Zilla even more, but it kinda sucks
+that sometimes existing dist.ini checkouts break after an upgrade
+(like the
+<a href="https://github.com/jquelin/app-cpan2pkg/pull/3">App-CPAN2pkg
+pull request</a> indicates).
+</p>
+
+<p>
+Anyway, CPANTS still complains about some stuff in my modules, but a lot
+of them are false positives.
+</p>
+
+<h2>Khronos Group Kickoff Meetup</h2>
+
+<p>
+I went to the kickoff meetup of <a href="http://www.meetup.com/Khronos-Tel-Aviv-Chapter/">Tel Aviv chapter</a>
+of <a href="https://en.wikipedia.org/wiki/Khronos_Group">Khronos Group</a>.
+In case you do not know, the Khronos group is an industry constortium for
+maintaining some standards for hardware-assisted computing like OpenGL
+and OpenCL (whose specifications are open, but do not always have open
+source implementations). I got some free food and drinks there, and it was
+easy to travel to, and I caught a ride back home. The talks - one about
+OpenVX and the other about OpenCL 2.0 were enjoyable, but I think I would
+have liked more code and focus on “hands-on” development.
+</p>
+
+<p>
+What the Khronos Group’s local chapters aim is to reach to the community
+of developers who use their APIs.
+</p>
+
+<p>
+Anyway, I met there a few people from some companies like Intel and
+AMD. I talked with the AMD representative and he was a bit shocked that
+I was using <a href="http://www.x.org/wiki/radeon/">the open source
+drivers</a> for Linux on my ATI Mobility HD laptop, saying that the proprietary
+drivers were more performant and featureful, and that the open source
+drivers were primarily provided for servers. I remember trying the
+proprietary drivers, but recall having some problems with them, and
+I also <a href="http://www.shlomifish.org/philosophy/computers/open-source/trust-non-FOSS/">hesitate
+to use proprietary software</a>, especially as kernel drivers.
+</p>
+
+<p>
+On the drive back, I talked with the driver about OpenCL and he gave me
+some ideas for a possible methods to still accelerate
+<a href="http://fc-solve.shlomifish.org/">Freecell Solver</a> using it. I'm
+not sure if they are practical, but they were still good food for thought.
+</p>
+
+<p>
+Anyway, I’d like to attend more of their meetups.
+</p>
+
+</div>
+
 </body>
 </html>
