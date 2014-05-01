@@ -3297,11 +3297,11 @@ start them again if they stalled.
 
 </div>
 
-<div class="entry" id="recent_hacktivity_log_29_march_2014">
+<div class="entry" id="recent_hacktivity_log_01_may_2014">
 
 <ul class="info">
 <li><b>Date:</b> 29-03-2014</li>
-<li class="tags">perl, philosophy, humor, hacktivity log, xml, films, fiction</li>
+<li class="tags">perl, du, analyze, </li>
 </ul>
 
 <h1>Recent Hacktivity Log</h1>
@@ -3309,6 +3309,56 @@ start them again if they stalled.
 <p>
 This is another “recent hacktivity logs” of some of the open source
 work I’ve been up to lately.
+</p>
+
+<h2>New Command-Line App: App-Du-Analyze</h2>
+
+<p>
+<a href="https://metacpan.org/release/App-Du-Analyze">App-Du-Analyze</a>
+(with its command-line script of "analyze-du") is now available on CPAN. What
+it does is allow you to analyse the output of the UNIX
+<a href="https://en.wikipedia.org/wiki/Du_%28Unix%29">Du command</a> get
+results based on a prefix and a depth and sort them. It is my preference
+for a disk usage analyser, with the benefit of being able to run several
+queries on the same data, by keeping the same du.txt file - a feature
+which I found is often lacking in GUI disk usage analysers.
+</p>
+
+<p>
+Here's an example for using it:
+</p>
+
+<pre>
+$ export ANALYZE_DU_INPUT_FN="$(pwd)/t/data/fc-solve-git-du-output.txt"
+$ analyze-du -p "fc-solve" -d 1
+16      fc-solve/tests
+120     fc-solve/docs
+172     fc-solve/scripts
+232     fc-solve/arch_doc
+276     fc-solve/rejects
+392     fc-solve/benchmarks
+2920    fc-solve/site
+4192    fc-solve/source
+44208   fc-solve/presets
+</pre>
+
+<p>
+You can find <a href="http://shlomif-tech.livejournal.com/40841.html">a
+report</a> about using an earlier incarnation of the same program to find
+the hotspots in a Windows XP disk.
+</p>
+
+<h2>New Versions of Maniac Downloader</h2>
+
+<p>
+I uploaded new versions of
+<a href="http://www.shlomifish.org/open-source/projects/maniac-downloader/">Maniac
+Downloader</a> which is a CPAN module that implements a download accelerator.
+What they do is convert the file open to sysopen (per
+<a href="http://blogs.perl.org/users/shlomi_fish/2014/01/tech-tip-opening-a-file-for-readwrite-without-clobbering-it.html">Steven
+Haryanto’s tip</a> (thanks Steven!), and
+attempt to refresh stale connections after a timeout, which is a problem
+that bit me several times.
 </p>
 
 <h2>Working on my CPANTS Kwalitee Score</h2>
@@ -3420,6 +3470,16 @@ not sure if they are practical, but they were still good food for thought.
 
 <p>
 Anyway, I’d like to attend more of their meetups.
+</p>
+
+<h2>perl-begin.org Update and Revamp</h2>
+
+<p>
+I dedicated some time to go over the contents of
+<a href="http://perl-begin.org/">the Perl Beginners’ Site (perl-begin.org)</a> and update
+it to reflect on new knowledge and best practices. Now the site is in
+much better shape than it was before. I still want to write an item for it
+in <a href="http://perl-begin.org/news/">its news page</a>.
 </p>
 
 <!-- To Add:
