@@ -3497,5 +3497,80 @@ in <a href="http://perl-begin.org/news/">its news page</a>.
 
 </div>
 
+<div class="entry" id="tech_tip_handling_int_vectors">
+
+<ul class="info">
+<li><b>Date:</b> 08-06-2019</li>
+<li class="tags">perl, perl 5, tech, tip, tech tip, int, vectors, bits, bytes</li>
+</ul>
+
+<h1>Tech Tips: Handling Int Vectors in Perl 5</h1>
+
+<h2>The Tip</h2>
+
+<p>
+Apparently, <a href="https://perldoc.perl.org/functions/vec.html">perldoc -f vec</a>
+writes 16-bit / 32-bit / 64-bit quantities in <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a>
+byte order, including on little endian architectures such as <a href="https://en.wikipedia.org/wiki/X86">x86</a>, which may cause issues when writing
+<a href="https://en.wikipedia.org/wiki/XS_%28Perl%29">XS / etc.</a> bindings.
+</p>
+
+<p>
+I used this approach on x86-64 Linux to overcome that:
+</p>
+
+<pre>
+use Inline C =&gt; &lt;&lt;"EOF", clean_after_build =&gt; 0;
+#include &lt;byteswap.h&gt;
+void add(SV * v_proto, size_t top, ssize_t dest)
+{
+    uint64_t *V = SvPV_nolen(v_proto);
+    uint64_t last = bswap_64(V[0]);
+    for (size_t i =1 ;i &lt;= top;++i)
+    {
+        const uint64_t next = bswap_64(V[i]);
+        V[ ++dest] = bswap_64(next + last);
+        last = next;
+    }
+}
+EOF
+</pre>
+
+<p>
+It likely will not work elsewhere.
+</p>
+
+<p>
+After doing that, I decided to try <a href="https://metacpan.org/pod/PDL">PDL</a>
+only to discover that when used on x86-64 mageia linux v7, its long()
+type was 32-bits and I had to use longlong(). The end of the story is
+that I ended up using a different approach which I have implemented
+in <a href="https://julialang.org/">Julia</a> (but which I think would also
+be functional if implemented in Perl 5) and which worked faster.
+</p>
+
+<h2>Media Recommendation</h2>
+
+<p>
+I enjoyed this <a href="https://www.youtube.com/watch?v=kihnB6M4Hzs">90's
+Pop Mashup</a> in case that is your thing.
+</p>
+
+<h2>Recommended Blog Post</h2>
+
+<p>
+<a href="https://arp242.net/jquery.html">"Why I'm still using jQuery
+in 2019"</a> which made me feel less guilt. ( <a href="https://news.ycombinator.com/item?id=20021289">Hacker News</a> and via <a href="https://www.tocode.co.il/">halinkiyah</a>.)
+
+<h2>Licence</h2>
+<p>
+Text is Copyright by Shlomi Fish 2019 under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>.
+You can freely reuse this code under your choice of
+<a href="https://en.wikipedia.org/wiki/MIT_License">the MIT/Expat License</a>
+or <a href="https://creativecommons.org/choose/zero/">the
+Public Domain/CC0</a>.
+</p>
+</div>
+
 </body>
 </html>
