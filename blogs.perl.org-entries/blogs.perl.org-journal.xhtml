@@ -3511,12 +3511,12 @@ in <a href="http://perl-begin.org/news/">its news page</a>.
 <p>
 Apparently, <a href="https://perldoc.perl.org/functions/vec.html">perldoc -f vec</a>
 writes 16-bit / 32-bit / 64-bit quantities in <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a>
-byte order, including on little endian architectures such as <a href="https://en.wikipedia.org/wiki/X86">x86</a>, which may cause issues when writing
+byte order, including on little endian architectures such as <a href="https://en.wikipedia.org/wiki/X86">x86</a>. This may cause issues when writing
 <a href="https://en.wikipedia.org/wiki/XS_%28Perl%29">XS / etc.</a> bindings.
 </p>
 
 <p>
-I used this approach on x86-64 Linux to overcome that:
+I ended up using the following approach on x86-64 Linux to overcome that:
 </p>
 
 <pre>
@@ -3560,14 +3560,14 @@ Pop Mashup</a> in case that is your thing.
 
 <p>
 <a href="https://arp242.net/jquery.html">"Why I'm still using jQuery
-in 2019"</a> which made me feel less guilt. ( <a href="https://news.ycombinator.com/item?id=20021289">Hacker News</a> and via <a href="https://www.tocode.co.il/">halinkiyah</a>.)
+in 2019"</a> which made me feel less guilt. ( <a href="https://news.ycombinator.com/item?id=20021289">Hacker News</a> and via <a href="https://www.tocode.co.il/">Halinkiyah</a>.)
 </p>
 
 <h2>Licence</h2>
 
 <p>
-Text is Copyright by Shlomi Fish 2019 under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>.
-You can freely reuse this code under your choice of
+The text is Copyright by Shlomi Fish 2019 under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>.
+You can freely reuse the source code under your choice of
 <a href="https://en.wikipedia.org/wiki/MIT_License">the MIT/Expat License</a>
 or <a href="https://creativecommons.org/choose/zero/">the
 Public Domain/CC0</a>.
